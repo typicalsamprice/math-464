@@ -1,0 +1,65 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Reflection 13}
+
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+This week was very busy and productive, as expected for any ``break'' I get from this godforesaken place.
+I worked on quite a few problems and (mostly) solved all of them:
+\begin{itemize}
+  \item Heine-Borel. This was exactly the boring parts I expected when going to prove this.
+        The closed subset of a compact set being compact was the route I went with since it seems the most standard.
+        For the forward direction, I was quite happy to use
+        \[ O_{k} = \set{ x \in X \mid d(x, y) > k } \]
+        since I don't think I've seen these used as the open-covering sets before.
+        Not a huge detail of course, but it felt clever to me.
+  \item Pullback properties on differential forms.
+        This was quite simple except for the part where I brushed over something because I couldn't understand the tensor theory described earlier in the textbook.
+        Is there any way to simplify this for just $f dx_{i}$ and $g dx_{j}$? Their wedge is just $fg dx_{i} \wedge dx_{j}$, but how does this split apart again?
+        Maybe it's not worth overthinking and just moving on.
+  \item Specific differential forms being analyzed (missing negative sign exercise).
+        This is mildly embarrassing in hindsight; on PDF page 270, real page 257 in Munkres it clearly shows $d\omega$ having the old $dx_{I}$ on the outside.
+        In the end, it works out because we both found my mistake and besides that slip-up the rest was perfectly fine.
+  \item Arctangent differential form exercise. I like how I got to rely on the midterm quite a bit for this - certain parts were also analagous which I didn't fully get when
+        doing it, which is neat. I feel like my argument became very clumsy at parts, but was correct enough that the end product was coherent.
+        Mainly, going from $f|_{B}$ back to $f$ on $A$, and arguing that it cannot be continuous, and so $f$ is not differentiable i.e. $f \notin \Omega^{0}(A)$.
+
+        For your clever shortcut, I think I'll have to look again
+        at integrating exact forms over closed loops in $\RR[2]$ and whatever
+        the equivalent may be in other spaces \textendash{}
+        vaguely reminded me of complex integration
+        from some videos I watched a while back from zetamaths,
+        so it seems interesting.
+        I should have slowed you down to clarify this, but we were short
+        on time since I had some volume to handle.
+
+  \item Not Very Large Commutative Diagram (NVLCD, for short).
+        This one has been the ``best'' exercise I've done all semester. We'll see if raw calculations and whatever other ones I dredge out of my notes are cool.
+        On the whole, I felt a toned-down version of ``elucidating much of vector calculus'' about it. I don't know if it's \emph{that} englightening, but it certainly
+        felt very concrete and yet abstract enough to itch my brain the right way.
+        Showing $\alpha, \beta$ were isomorphisms is something I was forgetting, but it worked out in the end.
+\end{itemize}
+
+I was also bored in WOTA after class, and worked out the $\sin(nx)\sin(mx)$ Kronecker problem.
+Not super difficult, just a lookup table for trig identities since I \emph{have never} remembered those, and I don't plan on starting any time soon.
+I'll have that written up for Thursday, or possibly tomorrow if I'm very ambitious.
+
+My plans for now are the raw tangent space calculations and a couple other exercises I've found in my notes/files on my computer.
+
+Here's to a strong end to the semester!
+
+Album recommendation: SMILE!\ $:$D by Porter Robinson.
+Probably not your style, whatever that may be, but I found it last week and I'd say it's in my top 3 of all time,
+next to The Original Motion Picture Soundtrack and Under The Shade of Green.
+
+
+\end{document}

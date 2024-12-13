@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+\author{Sam Price}
+\date{}% Clear that out
+\title{Math 464 Reflection 5}
+
+\input{preamble}
+\begin{document}
+
+\maketitle
+
+This week has been fairly uninteresting in terms of math, maybe as usual.
+The most influential part has been reading the textbook.
+Reading past the integration section into the Change of Variables chapter,
+it first talks about partitions of unity much like you mentioned today.
+I find the connection between the extended integral and such partitions interesting
+since initially they seem insanely different.
+I can also see why the Change of Variables Theorem is left as a capstone project,
+it looks very long and intimidating at a glance since it splits so many things up
+and Lemma-fies things to make it (somewhat) nicer to prove.
+
+% TODO Show that Transpose(M) = Inverse(M) for an orthogonal map M
+% Note orthogonal maps are of the form Mx for some M in O(n).
+
+The exercises on orthogonal transformations are interesting too.
+They aren't particularly hard (at least the ones I did quickly, obviously)
+but it is definitely interesting how much of math can be reduced in a useful way
+to good 'ol matrices. I'm going to go back and do some integral exercises to understand
+some of this stuff more before the midterm; it would be good for me to do some
+derivative stuff as well since that's the topic I understand the least right now.
+For raw calcuation \emph{of} a given function's derivative it isn't too difficult,
+but getting the hang of exercises like 9.4.5 where actually showing properties of them
+is necessary. That one in particular looks interesting since it is (almost) talking
+about varities in $\mathbb{R}^3$, although it skips out on solely restricting
+$f, g$ to polynomials in $\mathbb{R}\lbrack x, y, z\rbrack$.
+
+
+I remember watching a video that proves
+(in a somewhat YouTube-ified/immature way by likening contradiction to "proving the devil wrong")
+that a rotation about the origin and translation composed
+is simply a rotation about some other point.
+The edge case would be a translation being equivalent to a "rotation about a point at infinity"
+but I wonder if this can be rephrased in terms of these concepts and solved in a linear
+algebra-esque way. That video also only considers the case in $\mathbb{R}^2$ since it plays
+around in the plane; this could definitely be translated to higher dimensions in some fashion I'm sure.
+The only issue I believe one might run into is the fact that $\operatorname{SO}(n)$
+is nonabelian for $n > 2$, which are the cases we want.
+
+Using the determinant \emph{as} the measure of volume also gives more "intuition" or at least
+reasoning for why subspaces of dimension $< n$ are measure zero in $\mathbb{R}^n$.
+My intuition was always "why can't we just cover something like a plane in $\mathbb{R}^3$ with squares
+just like when integrating in $\mathbb{R}^2$ and use that same value?
+Looking forward to chapter 5, turns out that's exactly what manifolds are for in the first place.
+This makes more sense to me since it feels incredibly useless to \emph{always} shove a line and plane into the same category:
+one is clearly "bigger" intuitively and so should live in some larger space
+rather than just being compacted into the measure-zero behemoth.
+
+I also have a solution to the question of if $f, g \colon \mathbb{R}^n \to \mathbb{R}$
+are functions such that $f \ne g$ only on a measure-zero set $D$ and $f$ is continuous,
+can $g$ be continuous? 
+The answer is no, and is shown by picking $d \in D$.
+Then, we can have $(x_n) \to d$ with $f(x_n) \to f(d)$.
+However, we may also pick our sequence so no $x_i \in D$,
+since $D$ may not contain a whole open interval it may be at "most" dense.
+This means that $x_n \to d$ but $g(x_n) \not\to g(d)$ since $g(x_n) = f(x_n) \to f(d)$
+and so $g$ cannot be continuous at any $d$, but is continuous everywhere else.
+
+\end{document}

@@ -1,0 +1,37 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{Math 464: Ex. 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}
+  If $(X, d)$ is a compact metric space then $X$ is closed and bounded.
+  Furthermore, if $X \subseteq \RR[n]$ then $X$ is compact if and only if it is closed and bounded.
+\end{theorem}
+
+\begin{proof}[If $X$ is compact, then it is closed and bounded]
+  Let $X$ be compact, and fix $a \in X$. Then, cover with
+  \[ B_{k} = \set{ x \in X | d(a, x) < k } \]
+  for all $k \in \NN$.
+  This open cover can then be reduced to a finite cover, with $m$ being the largest-indexed open set.
+  This $B_{m}$ contains $B_{n}$ for $n < m$ and so must contain all of $X$. So, $X$ is bounded.
+
+  Suppose now that $X$ is not closed, and so there is some $y \notin X$ that is a limit point.
+  Take the open cover:
+  \[ C_{r} = \set{ x \in X | d(x, y) > r } \]
+  for all $r \in \RR$. Notice that each of these sets are the complements of closed balls, and so are open themselves.
+  Choose finitely many to cover $X$. Then we may pick the smallest index again, say $\delta$.
+  So, if we have a sequence $\set{x_{m}} \in X$ so that $x_{m} \to y$, not all $x_{i}$ are contained in our finite cover.
+  This is because for $\eps < \delta$, we cannot find any $x \in \cup C_{i}$ so that $d(x, y) < \eps$ by definition.
+\end{proof}
+\end{document}

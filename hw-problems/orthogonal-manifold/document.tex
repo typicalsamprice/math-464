@@ -1,0 +1,70 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Orthogonal Group Is Manifold}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}{}{}
+  Let $f \from \RR[n + k] \to \RR[n]$ be $C^{r}$.
+  Let $M = f\inv(0) \ne \emptyset$.
+  If $\rank Df = n$ on all of $M$, then $M$ is a $k$-manifold without boundary in $\RR[n + k]$.
+\end{theorem}
+\begin{proof}
+  Already proven.
+\end{proof}
+
+
+\begin{theorem}{}{}
+  Show that, if $\Orth(3)$ is the group of $3 \times 3$ matrices of real numbers of determinant $\pm 1$ that
+  \begin{enumerate}[start=1,label={\arabic*\rparen}]
+    \item There is a smooth function $f \from \RR[9] \to \RR[6]$ so that $f\inv(0) = \Orth(3)$.
+    \item $\Orth(3)$ is a compact 3-manifold without boundary.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  We want to use what we know about orthogonal matrices: their columns are of course orthonormal.
+  So, we define a smooth function on $[c_{1}\ c_{2}\ c_{3}]$, the columns of a matrix in $M_{3}(\RR)$.
+  \begin{align*}
+    f_{1} &= c_{1} \cdot c_{2}\\
+    f_{2} &= c_{1} \cdot c_{3}\\
+    f_{3} &= c_{2} \cdot c_{3}.
+  \end{align*}
+  This takes care of the orthogonality; to consider the normality, we craft:
+  \begin{align*}
+    f_{4} &= c_{1} \cdot c_{1} - 1\\
+    f_{5} &= c_{2} \cdot c_{2} - 1\\
+    f_{6} &= c_{3} \cdot c_{3} - 1.
+  \end{align*}
+  So, by construction, a matrix $A = [c_{1}\ c_{2}\ c_{3}]$ gives $f(A) = 0$ if and only if $A \in \Orth(3)$.
+  It is also clear $f$ is smooth, as all of the components are polynomial in the elements of $A$.
+
+  To show $\Orth(3)$ is a compact 3-manifold, we use the previous theorem.
+  Looking at $Df$, we see that (abusing notation of columns versus 3-tuples of real numbers):
+  \begin{equation*}
+    Df(c_{1}, c_{2}, c_{3}) = \begin{bmatrix}
+      c_{2} & c_{1} & 0\\
+      c_{3} & 0 & c_{1}\\
+      0 & c_{3} & c_{2}\\
+      2c_{1} & 0 & 0\\
+      0 & 2c_{2} & 0\\
+      0 & 0 & 2c_{3}
+    \end{bmatrix}
+  \end{equation*}
+  Inside $\Orth(3)$, these $c_{i}$ are necessarily independent.
+  It follows these rows are also independent ($A^{T} \in \Orth(3)$ as well),
+  and so $\Orth(3)$ is a 3-manifold without boundary in $\RR[9]$.
+  To verify compactness, note that each $a_{i} \in A \in \Orth(3)$ has at most magnitude 1.
+  This means that $\Orth(3) \subset \set{ x \in \RR[9] \mid \norm{x}_{\sup} \le 1 }$ and is therefore bounded.
+  Indeed, $\Orth(3) = f\inv(0)$ and so must be closed as well. By Heine-Borel, it is compact.
+\end{proof}
+
+\end{document}

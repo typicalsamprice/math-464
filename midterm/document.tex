@@ -1,0 +1,254 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Midterm}
+
+\usepackage{xcolor}
+\usepackage{pgfplots}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\newcommand{\bv}[1]{\bar{\vec{#1}}}
+\newcommand{\T}{\mathcal{T}}
+\DeclareMathOperator{\nullity}{nullity}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}{Lagrange Multipliers}{}
+  Let $U \subset \RR[n]$ be open, $f \from U \to \RR$ be differentiable and $g \from U \to \RR[m]$ be $C^{1}$.
+  Let $\vec{a} \in U$ so that $g(\vec{a}) = 0$ and $\rank Dg(\vec{a}) = m$. If $\vec{a}$ is a local extrema of $f$ with respect to $g = 0$,
+  then there exist $\lambda_{i}$ so that
+  \[ Df(\vec{a}) = \lambda_{1}Dg_{1}(\vec{a}) + \cdots + \lambda_{m}Dg_{m}(\vec{a}). \]
+\end{theorem}
+
+\begin{enumerate}[start=1,label={(\alph*)}]
+  \item Let $M = g\inv(0)$.
+        We would like to show that there is some open $V \subset \RR[n-m]$ and $W \subset M$ with $\vec{a} \in W$ such that
+        \[ W = \set*{ \begin{pmatrix} \bar{\vec{x}} \\ \phi(\bar{\vec{x}}) \end{pmatrix} \Bigg| \ \ \bar{\vec{x}} \in V } \]
+        with $\phi \from V \to \RR[m]$ and continuously differentiable. Further,
+        \[ \begin{pmatrix} \bar{\vec{a}} \\ \phi(\bar{\vec{a}}) \end{pmatrix} = \bar{\vec{a}}. \]
+
+        Note that this means we have to construct $V, W$ and $\phi$ ourselves.
+
+        \begin{proof}
+          Since $\rank D g(\vec{a}) = m$ we may use the implicit function theorem to declare the function $h \from V \to \RR[m]$ exists so that
+          $g(\bv{x}, h(\bv{x})) = 0$, and of course $(\bv{a}, h(\bv{a})) = a$. Indeed, $V \subset \RR[n - m]$ and must be open, as well as $h \in C^{1}$.
+          Since $(\bv{x}, h(\bv{x})) \in g\inv(0)$, we can in fact take an open subset $W$ of $M$ so that
+          \[ W = \set*{ \begin{pmatrix} \bv{x} \\ h(\bv{x}) \end{pmatrix} \Bigg| \ \ \bv{x} \in V }. \]
+          We know $\vec{a} \in W$ as well, since $\vec{a} \in h(V)$. We may rename $h$ to $\phi$ to stay consistent with the notation used.
+        \end{proof}
+
+  \item Let $\Phi\from V \to \RR[n]$ be the function $\bv{x} \mapsto (\bv{x}, \phi(\bv{x}))$. Prove that $g \circ \Phi = 0$ and $f \circ \Phi$ has a local extrema at $\bv{a}$.
+
+        For the first, it is easy to see that $(g \circ \Phi) \from V \to \RR[n]$. Since $\im \Phi = W \subset M$, the composition must in fact be exactly zero.
+
+        For the latter, by hypothesis of the theorem, $\vec{a}$ is a local extrema of $f$ with respect to $g = 0$.
+        Note any input to $f \circ \Phi$ must again come from the preimage $W \subset M$.
+        Since $\Phi(\bv{a}) = \vec{a}$, it follows that $\bv{a}$ is a local extrema of $f \circ \Phi$ since its domain only allows inputs that satisfy $g = 0$
+        and $f(\vec{a})$ is a local extrema.
+
+  \item Let $\T = \im D \Phi(\bv{a})$. Use the chain rule to prove $\T \subset \ker D g(\vec{a})$ and $\T \subset \ker D f(\vec{a})$.
+
+        \begin{proof}
+          Note that by the chain rule, we have
+          \[ D (g \circ \Phi)(\bv{a}) = D g(\Phi(\bv{a})) D \Phi(\bv{a}). \]
+          Both sides must be identically zero, since $g \circ \Phi = 0$.
+          This means that
+          \[ D g(\vec{a}) D\Phi(\bv{a}) = 0. \]
+          Now, let $x \in \T$. This means there is some $v \in \RR[n-m]$ so that $D\Phi(\bv{a})v = x$.
+          Further, we see that
+          \[ D g(\vec{a}) \cdot (D \Phi(\bv{a}) v) = D g(\vec{a}) x = 0. \]
+          This means that $x \in \ker D g(\vec{a})$ and thus $\T \subset \ker D g(\vec{a})$.
+
+          Consider now $f \circ \Phi$, and that $D(f \circ \Phi)(\bv{a}) = Df(\vec{a})D\Phi(\bv{a})$.
+          Since $\bv{a}$ is an extremum of $f \circ \Phi$, we know that the left side is zero.
+          By multiplying out as above, we find that $v \in \RR[n-m]$ gets sent to 0 by this transformation,
+          and so $D\Phi(\bv{a})v$ is in the kernel of $Df(\vec{a})$.
+        \end{proof}
+
+  \item Use rank-nullity to show $\T = \ker D g(\vec{a})$. Conclude $\operatorname{Row} Df(\vec{a}) \subset \operatorname{Row} Dg(\vec{a})$ (referred to as $F, G$ respectively).
+
+        \[ D\Phi(\bv{a}) = \begin{bmatrix}
+          \\ \quad & I_{n - m} & \quad \\ \\
+          \\ \quad & D\phi(\bv{a}) & \quad \\ \\
+        \end{bmatrix} \]
+
+        By above it is obvious that the row rank is $n - m$, and by equality of row and column rank that means that $\dim \T = n - m$.
+        Since that is the same dimension as $\ker Dg(\vec{a})$ and $\T$ is a subspace, they must be equal.
+
+        I cannot currently (if this is still here, never succeeded) figure out why $Df(\vec{a}) \in G$.
+        That is all that is needed.
+
+        \textbf{Note}: After fully giving up, this looks like it might need orthogonal complements to be done properly?
+        I haven't learned about them in the slightest though, so it isn't really valid as a solution to this step.
+        This argument would be in essence, since $T = \ker Dg$ and $T \subset \ker Df$ (abbreviated, since this isn't serious either way)
+        and so this implies $\ker Df \subset \ker Dg$. Then, we see that if $F, G$ are the corresponding row spaces
+        \[ \ker Dg \subset \ker Df \implies (\ker Df)^{\bot} \subset (\ker Dg)^{\bot} \leadsto F \subset G. \]
+
+        After your hints, I can see how the proper way would be effectively to discover this myself (although perhaps not the same language?)
+        I was incredibly confused how showing the subspace relation was \emph{before} showing the generating element of $F$ is just\ldots in $G$.
+
+  \item Finish the proof!
+
+        Since $F \subset G$, some linear combination of $Dg_{i}(\vec{a})$ can create every element of $F$, including $Df(\vec{a})$ itself.
+        Therefore, we have $\lambda_{i} \in \RR$ for $1 \le i \le m$ so that
+        \[ Df(\vec{a}) = \lambda_{1}Dg_{1}(\vec{a}) + \cdots + \lambda_{m}Dg_{m}(\vec{a}). \qed \]
+
+\end{enumerate}
+
+\newpage
+
+\begin{theorem}{}{}
+  Let $f \from \RR[2] \to \RR$ be $C^{1}$. Then $f$ is not injective.
+\end{theorem}
+
+\begin{enumerate}[start=1,label={(\alph*)}]
+  \item Suppose $Df(x, y) = [ f_{x}(x, y) f_{y}(x,y) ] = 0$ for all $(x, y) \in \RR[2]$.
+
+        By the mean value theorem, take $c, c + h \in \RR[2]$. Then there is some $t \in (0, 1)$ so that
+        \[ f(c) - f(c + h) = Df(c + th)/\norm{h} = 0 \]
+        This means that $f(c) = f(c + h)$ and since this was generic in $\RR[2]$, $f$ must be constant.
+        Since $f$ is constant, it cannot be injective as \emph{every} input has the same output.
+
+  \item Let $(a, b) \in \RR[2]$ so that $Df(a, b) \ne 0$. Prove there is a partial derivative $D_{i}f$ so that so that
+        \[ D_{i}f(x, y) \ne 0 \]
+        for all $(x, y) \in B(a, b)$.
+
+        \begin{proof}
+          Let $(a, b)$ so that $Df(a, b) \ne 0$. Since $Df$ is continuous, its partials must be as well.
+          As such, some partial (WLOG take the second) $D_{y}f(x, y) \from \RR[2] \to \RR$ is nonzero at $(a, b)$.
+          Therefore, we may take an open neighborhood $U$ (as $D_{y}f$ is continuous)
+          around $b$ in $\RR$ so that $D_{y}f(a, y') \ne 0$ for all $y' \in U$.
+        \end{proof}
+
+  \item Define $h(x, y) = f(x, y) - f(a, b)$. Prove at least one partial is nonzero on $U$. Conclude then by the implicit function theorem
+        that $f$ cannot be injective.
+
+        \begin{proof}
+          Let $h$ as above. Clearly, $h(a, b) = 0$ and $Dh(x, y) = Df(x, y)$ as normal.
+          As above, one must be nonzero on $U$ and we assume the $y$ partial.
+          By the implicit function theorem there is $g \from U \to \RR$ so that $h(x, g(x)) = 0$ on $U$ and $g(a) = b$.
+          Since $h = f$ up to a constant and \emph{is} constant on $U$, then $f$ may not be injective.
+        \end{proof}
+
+  \item Generalize to $f \from \RR[n] \to \RR[m]$ with $n > m$ and $f \in C^{1}$.
+
+        \begin{proof}
+          If $Df$ vanishes everywhere, then by the mean value theorem as before we can say $f$ is constant and non-injective.
+          Suppose $Df \ne 0$ and is nonsingular at some point $(a, b)$ with $a \in \RR[n - m]$ and $b \in \RR[m]$
+          so that (without loss of generality) the $m \times m$ minor $\partial f / \partial y$ is nonsingular.
+          So, we find that there is a $g \in C^{1}$ function from $U \subset \RR[n - m] \to \RR[m]$ so that $g(a) = b$ and $f(a, g(a)) = 0$
+          on all of $U$. Thus, $f$ is not injective.
+        \end{proof}
+
+        This doesn't feel right in retrospect.
+\end{enumerate}
+
+\newpage
+
+Let $V = \set*{ (r, \theta) \in \RR[2] \mid r > 0, \theta \in (0, 2\pi) }$. Define $f \from V \to \RR[2]$:
+\[ f(r, \theta) = \begin{pmatrix} r \cos \theta \\ r \sin \theta \end{pmatrix}. \]
+
+\begin{enumerate}[start=1,label={(\alph*)}]
+  \item Show that $f$ is injective, compute $Df$ and show that $\det Df \ne 0$ for all $(r, \theta) \in V$.
+        Draw the set $f(V) \subset \RR[2]$.
+
+        \begin{enumerate}[start=1,label={\roman*\rparen}]
+          \item Let $(r \cos \theta \ \ r\sin\theta) = (r' \cos \theta' \ \ r'\sin\theta')$.
+
+                Clearly, this requires that $r = r'$ as they otherwise would land on different concentric circles.
+                Further, suppose $\cos \theta = \cos \theta'$ with $\theta \ne \theta'$.
+                This requires that $\theta$ is symmetric to $\theta'$ across the line $x = \pi$ in $\RR[2]$, but $\sin \theta$ is not symmetric there and so
+                could not be equal in the second coordinate.
+
+                In a similar vein, $\sin \theta = \sin \theta'$ with inequal angles only if they are symmetric over $\pi/2$ or $3\pi/2$,
+                which $\cos \theta$ is neither. So, $\theta = \theta'$ and $r = r'$ and thus $f$ is injective.
+
+
+          \item \[ Df = \begin{bmatrix} \cos \theta & -r \sin \theta \\ \sin \theta & r \cos\theta \end{bmatrix} \]
+          \item Of course, $\det Df = r(\cos^{2}\theta + \sin^{2}\theta) = r > 0$.
+
+          \item Take the band between $y = 0$ and $y = 2\pi$ (open, of course). This extends along the positive $x$-axis, since $V = (0, 2\pi) \times (0, \infty)$.
+        \end{enumerate}
+
+  \item By the inverse function theorem, every point in $V$ has nonsingular determinant and so can be locally inverted.
+        Specifically,
+        \[ f\inv \begin{pmatrix} x \\ y \end{pmatrix} = (\sqrt{x^{2} + y^{2}}, \theta(x, y)). \]
+        Namely,
+        \[
+        \theta \begin{pmatrix} x \\ y \end{pmatrix} = \begin{cases}
+          \arctan\pars{\frac{y}{x}} & \text{ if } x > 0, y \ge 0.\\
+          \arctan\pars{\frac{y}{x}} + \pi & \text{ if } x < 0, y \ne 0. \\
+          \arctan\pars{\frac{y}{x}} + 2\pi & \text{ if } x > 0, y < 0. \\
+          \frac{\pi}{2} & \text{ if } x = 0, y > 0.\\
+          \frac{3\pi}{2} & \text{ if } x = 0, y < 0.
+        \end{cases}
+        \]
+        After some messing with Desmos this \emph{seems} correct. Origin is left uninverted, of course.
+
+  \item Fix $r_{1}, r_{2}, \theta_{1}$ and $\theta_{2}$ with $r_{1} < r_{2}$ and $\theta_{1} < \theta_{2}$.
+        Let $C \subset f(V)$ be the region enclosed by circles with radii $r_{1}$ and $r_{2}$ and the rays with angles between $\theta_{1}$ and $\theta_{2}$ (should this be the \emph{positive} x-axis?).
+
+        If $h \from C \to \RR$ is integrable and $h(x, y) = g(r(x, y), \theta(x, y))$, show that
+        \[ \int_{C}h = \int_{r_{1}}^{r_{2}}\int_{\theta_{1}}^{\theta_{2}}r g(r, \theta) d\theta dr. \]
+
+        \begin{proof}
+          Since $f\inv$ is well-defined (as previously show, $f$ is invertible away from the origin) we want to take $h \circ f\inv$ so that
+          \[ \int_{C}h = \int_{f(C)}(h \circ f) \abs{\det Df} = \int_{r_{1}}^{r_{2}}\int_{\theta_{1}}^{\theta_{2}} g(r, \theta) r d\theta dr. \]
+          So, we see that (rename to $r, \theta$ since those are the input names for $f$)
+          \[ (h \circ f)(r, \theta) = g(r(r \cos \theta, r \cos \theta), \theta(r \cos \theta, r \sin \theta)) = g(r, \theta). \]
+        \end{proof}
+
+  \item Let $B_{r}$ be the closed ball of radius $r$ centered at 0 and is inside $\RR[2]$. Show that
+        \[ \int_{B_{r}}h = \int_{0}^{r}\int_{0}^{2\pi} g(r, \theta) r d\theta dr. \]
+
+        Clearly, $B_{r}$ is rectifiable and so $h$ must be integrable on it.
+        Further, define a series of compact rectifiable sets (nested in the usual way) where
+        \[ C_{i} = \set*{ (R, \theta) \in V \Big| \frac{1}{i} \le R \le r - \frac{1}{i}, \frac{1}{i} \le \theta \le 2\pi - \frac{1}{i} }. \]
+        Also, these $\set{C_{i}}$ equal $A = \set{ (R, \theta) \in V \mid R < r }$ in their union.
+        Since each $C_{i}$ is integrable and within $B_{r}$ we know $h$ is integrable over it, and their limit is the integral over $A$.
+        \[ \int_{A} h = \lim_{n \to \infty}\int_{C_{n}}h \le \int_{B_{r}}h. \]
+        If we extend $h$ to $h_{A}$ so that it is defined on $B_{r}$ but vanishes outside of $A$, we can actually decree these as equals
+        since $h_{A}$ and $h$ disagree only on a set of measure zero (the $\Bd B_{r}$ and $\set{(x, y) \in \RR[2] \mid -r < x < 0, y = 0}$).
+        Therefore,
+        \[ \int_{B_{r}}h = \lim_{n \to \infty}\int_{C_{n}}h = \int_{0}^{r}\int_{0}^{2\pi}g(r, \theta)\, r\, d\theta dr. \]
+
+  \item Let $C_{r}$ be the rectangle $\bracks{-r, r}^{2} \subset \RR[2]$. Prove
+        \[ \int_{B_{r}}\! e^{-(x^{2} + y^{2})} dx dy = \pi(1 - e^{-r^{2}}) \] and \[ \int_{C_{r}}e^{-(x^{2} + y^{2})} dx dy = \pars*{\int_{C_{r}} e^{-t^{2}} dt}^{2}. \]
+
+        The first can be done by inspection and the fact that $x^{2} + y^{2} = r^{2}$.
+          \begin{align*}
+            \int_{B_{r}}\! e^{-(x^{2} + y^{2})} dx dy &= \int_{0}^{r}\int_{0}^{2\pi} e^{-r^{2}} r d\theta dr\\
+            &= \int_{0}^{r^{2}} \pi e^{-u} du\\
+            &= \pi(1 - e^{-r^{2}}).
+        \end{align*}
+        Then, we see that
+        \begin{align*}
+          \int_{C_{r}} e^{-x^{2}-y^{2}} &= \int_{-r}^{r}\int_{-r}^{r}e^{-x^{2}}e^{-y^{2}}\\
+          &= \int_{-r}^{r}\pars*{\int_{-r}^{r}e^{-x^{2}}}e^{-y^{2}}\\
+          &= \int_{r}^{r}e^{-x^{2}}\int_{-r}^{r}e^{-y^{2}} = \pars*{\int_{-r}^{r}e^{-x^{2}}}^{2}
+        \end{align*}
+        which is possible since $\int_{[-r, r]}e^{-x^{2}}$ converges and is simply just some real number.
+
+  \item Prove
+        \[ \lim_{r \to \infty}\int_{B_{r}} e^{-x^{2}-y^{2}} = \lim_{r \to \infty} \int_{C_{r}} e^{-x^{2}-y^{2}} \]
+        and conclude with the Gaussian integral result.
+
+        Note that $B_{r} \subset C_{r} \subset B_{r\sqrt{2}}$, and because the function being integrated is always positive,
+        the integrals over these regions are monotonic and stay in this order (with $\subset\ \leadsto\ <$) when evaluated.
+        However, since $\lim_{r\to\infty}\int_{B_{r}} \exp(-x^{2}-y^{2}) = \lim_{r \to \infty}\int_{B_{r\sqrt{2}}} \exp(-x^{2} - y^{2})$,
+        we find they squeeze the integral over $C_{r}$ between and all must be equal.
+        It follows that
+        \[ \pi(1 - e^{-r^{2}}) < \pars*{\int_{-r}^{r}e^{-x^{2}}}^{2} < \pi(1 - e^{-2r^{2}}). \]
+        By squeezing and actually evaluating as $r \to \infty$, we find that the central value must be $\pi$ itself.
+        Thus, we get the intended result by taking the square root.
+\end{enumerate}
+
+
+
+\end{document}

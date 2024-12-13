@@ -1,0 +1,59 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\author{Sam Price}
+\title{Reflection Eight}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+This week has been incredibly stressful in terms of math, and I don't expect that to change any time soon.
+Next semester should be a far lesser load, looking for roughly 15 credits instead of 20, with 2 math + 2 CS + PWP 372. Never again.
+
+Onto math! In terms of positives, this week has been kind to me.
+I'm starting to grasp some concepts around manifolds, and it has been interesting to see some of the relations coming together with algebraic geometry.
+Iain and I just got done working on a couple things (it is 9 pm, roughly) and that had some fruitful results as well.
+We worked on the problem involving the manifold defined by
+\[ a(t) = \begin{pmatrix} t + t^{2} \\ t^{2} \\ t^{3} \end{pmatrix}. \]
+We got as far as showing $\alpha$ itself is a diffeomorphism from $\RR \to \RR[3]$, but we didn't understand my notes of what the problem (2) and (3) parts were requesting.
+
+The other problem we got halfway through was showing $\GL_{n}$ and $\SL_{n}$ are manifolds.
+We showed that since $\GL_{n} \subset \RR[n^{2}]$ is open ($\GL_{n} = \det\inv(\RR \setminus \set{0})$) and $\RR[n^{2}]$ is a manifold,
+then $\GL_{n}$ must also by leveraging the implicit manifold definition and restrictions.
+Then, we showed that $f_{A}\from \GL_{n} \to \GL_{n}$ defined by $B \mapsto AB$ is smooth since its derivative is $\pars{\det B}^{2} > 0$.
+As $A$ is generic over $\GL_{n}$, this is actually equivalent to showing the binary operation is smooth as well.
+Further, taking the inverses were smooth since that can be computed as a series of multiplications, and so $\GL_{n}$ is a real Lie group!
+With the $\SL_{n}$ part we decided we couldn't really get far enough yet, and so will revisit after a couple more classes most likely.
+
+Struggles this week were not limited to MATH 464.
+I've spent both a decent amount of time and simultaneously not enough on exercises in the textbook.
+As we get further into manifolds, I really do just need to bite the bullet and buckle down for a weekend or two.
+In terms of fundamental concepts, I don't fully get why the implicit manifold part is useful.
+How can a $C^{r}$ function have a preimage of 0 that is $M \cap W$? From what I could tell $W$ had to be open, so how is $F\inv(0)$ equal?
+Is this an artifact of $M$ being (probably?) closed in its larger space and it requires a transformation to understand directly?
+
+I'm going to also try and make as many corrections/additions to my presentation tomorrow morning and during my CS class.
+No promises I get \emph{everything} done, but I will do as much as is feasible.
+
+In terms of my midterm, I'm very curious as to what the generalized case of (2) looks like.
+I more or less made all of that up without understanding it, just making it sound like the previous steps.
+Looking back a couple mistakes are a tad silly, as per usual, but I'll settle at times for knowing what I thought I meant was correct even
+if I absolutely bombed transferring that idea to paper. Not ideal, but \emph{sometimes} I have to make mistakes I \emph{suppose}.
+
+In other math classes, I did have a bit of fun.
+In abstract, I decided instead of doing some inspection/casework I would come up with a lemma and prove it, then give one-word answers
+to each part. Luckily, what I hypothesized was true and inspired by a previous exercise (product of cyclic groups is cyclic iff their orders are coprime.)
+This was really just because it seems very funny to overcomplicate something initially and then rest on my laurels for the bit.
+
+Also, I lied about the programmer-turned-farmer today, Dylan Araps. I said his largest project was neofetch; turns out neofetch ``only'' has 22k stars, and his
+project titled ``pure bash bible'', which is just a collection of bash snippets/ideas (hence ``bible'' - this is a series across many creators)
+has over 36k stars. Not even CLOSE to the 100k I made up on the spot, but still incredibly impressive.
+His tool pywal (generates colorschemes for \emph{everything} based on wallpaper colors) only has about eight thousand,
+which is still really cool for an independent open-sourcer admittedly.
+
+\end{document}

@@ -1,0 +1,54 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Verify Pullback Properties}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Let $A, B, C$ be open in $\RR[n]$.
+Then, let $\omega, \eta \in \Omega^{k}(C)$ and $\theta \in \Omega^{l}(C)$ with
+\[ \alpha \from A \to \RR[n] \]
+and
+\[ \beta \from B \to \RR[n] \]
+so that
+\[ \alpha(A) \subset B, \beta(B) \subset C. \]
+
+Verify:
+\begin{enumerate}[start=1,label={\arabic*\rparen}]
+  \item $\beta^{*}(a\omega + b\eta) = a\beta^{*}\omega + b\beta^{*}\eta$ for $a, b \in \RR$.
+  \item $\beta^{*}(\omega \wedge \theta) = \beta^{*}\omega \wedge \beta^{*}\theta$.
+  \item $(\beta \circ \alpha)^{*}\omega = \alpha^{*}(\beta^{*}\omega)$
+\end{enumerate}
+
+For the first, we simply have:
+\begin{align*}
+  \beta^{*}(a\omega + b\eta)(v_{1}, \ldots, v_{k}) &= (a\omega + b\eta)(\beta_{*}v_{1}, \ldots, \beta_{*}v_{k})\\
+  &= (a\omega)(\beta_{*}v_{1}, \ldots, \beta_{*}v_{k}) + (b\eta)(\beta_{*}v_{1}, \ldots, \beta_{*}v_{k})\\
+  &= a\beta^{*}\omega + b\beta^{*}\eta.
+\end{align*}
+
+The jump can happen because $k$-forms are linear themselves, which is quite nice.
+
+The third is also simpler, since it is just function composition:
+\begin{align*}
+  (\beta \circ \alpha)^{*}\omega &= \omega(\beta \circ \alpha)_{*}\\
+  &= \omega \circ (\beta_{*} \circ \alpha_{*}) \qquad \text{ from the book Lemma 29.1}\\
+  &= (\omega \circ \beta_{*}) \circ \alpha_{*}\\
+  &= \alpha^{*}(\omega \circ \beta_{*}) = \alpha^{*}(\beta^{*}\omega).
+\end{align*}
+
+The second is the last one I did, so I'll continue in this order.
+\begin{align*}
+  \beta^{*}(\omega \wedge \theta)(v_{1}, \ldots, v_{k + l}) &= (\omega \wedge \theta)(\beta_{*}v_{1}, \ldots, \beta_{*}v_{k + l})\\
+  &= \omega(\beta_{*}v_{1}, \ldots, \beta_{*}v_{k}) \wedge \theta(\beta_{*}v_{k + 1}, \ldots, \beta_{*}v_{k + l})\\
+  &= \beta^{*}\omega \wedge \beta^{*}\theta.
+\end{align*}
+
+\end{document}

@@ -1,0 +1,54 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\begin{document}
+
+\begin{center}
+  \textbf{Self Reflection 1} \qquad Sam Price
+\end{center}
+
+This week I primarily spent my time working through some of the first exercises in Munkres, focusing on the inner product things, although I did spend quite some time thinking about the first real ``assigned''/presentable problem we got.
+
+Let me first start with what I \emph{don't} understand quite yet: While working through the metric-induced norm problem, I came across a slight issue.
+I came up with the translation invariance and homogeneity requirements, and could prove that said metric induces the norm $\norm{\indet} = d(\indet, 0)$.
+When going the other way though, I was getting stuck and naturally looked for any pointers on the internet.
+I came across a Math SE post (I cite this in my writeup for the problem, it is question 2888192)
+that shows that the backwards direction \emph{does not} hold. That is, there is a metric (what they referred to as the ``french railway metric'') that creates the same norm without keeping translation invariance.
+Said metric essentially is Euclidean distance but only allowing travel along lines through the origin.
+Wikipedia's article on metric spaces doesn't say anything except for the direction I proved. Is what I \emph{should} be
+proving something more like:
+\begin{center}
+  \fbox{\parbox{\textwidth/2}{
+    A metric induces the norm $\norm{x - y} := d(x, y)$ if and only if it is homogeneous and translation-invariant.
+  }}
+\end{center}
+I am going to guess that my struggles come from not understanding the problem; this most likely extends to the norm $\mapsto$ inner product requirements and proof. I'll talk to you tomorrow (or today, if that's when this gets turned in) about this.
+I already have ideas about the boxed-in statement and have shown that the railway metric
+doesn't hold for the target norm, which is good.
+
+Onto the positives, what \emph{do} I understand this week? I learned about dual spaces, which is pretty neat, although I wouldn't say I have any intuitive or ``quick'' understanding of it at present.
+I now also understand how an inner product space is in some sense one of the ``strongest'' vector spaces
+since it has an induced norm and metric included for ``free''.
+The biggest sense of knowledge gain thus far is easily looking at some of the theorems/proofs/observations
+for matrix shenanigans in Munkres. Before I take linear algebra this will probably be my best exposure to it.
+
+My goal for the next week (or two) is to work on more of the ``official'' problems as usual,
+as well as to try to solidify my understanding of matrices and some of the things I don't quite get about linear algebra.
+There's a lot of room for improvement there naturally, and I have an inkling that it may become important for a month or two for me to be more familiar with some of these topics.
+Speaking of, why isn't math 355 a prereq for 464?
+Is it just because it's a topics course and is \emph{very} volatile in content?
+
+Since our class, I also have cofactor expansion to learn about and a couple more exercises to get ahead of.
+The ones I plan to show you (as of now) is the aforementioned metric $\mapsto$ norm $\mapsto$ inner product chain, and
+the matrix equivalency one since those seem the most $\ldots$important?
+
+\vspace{2cm}
+Unrelated but I thought it was funny (and perhaps concerning?) Apparently I was mumbling in my sleep saying ``therefore'', ``thus'' and ``derivative'' last night. My roommate is mildly concerned but what can ya do sometimes.
+
+
+\end{document}

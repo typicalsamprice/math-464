@@ -1,0 +1,33 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Orthogonal Matrix}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{proposition}{}{}
+  For any orthogonal matrix (matrix with columns forming an orthonormal basis) $M$,
+  \[ M\inv = M^{T}. \]
+\end{proposition}
+\begin{proof}
+  Let $M = [ v_{1} \cdots v_{n} ]$.
+  We note that
+  \[ (M^{T}M)_{ij} = v_{i} \cdot v_{j} = \abs{v_{i}}\abs{v_{j}}\cos\theta = \cos\theta. \]
+  Where we can eliminate the scaling factor since $\abs{v_{k}} = 1$.
+  Further, the $\cos\theta$ simply reduces to $\delta_{ij}$ due to the orthogonal nature of these vectors.
+  So, we end with $(M^{T}M)_{ij} = (I_{n})_{ij} = \delta_{ij}$ and $M^{T}M = I_{n}$.
+
+  We also know that $M$ must be invertible since it has full rank (we have a basis, after all)
+  and so $(M^{T}M)M\inv = M\inv$ by above. However, we also then know $M^{T}(MM\inv) = M^{T}$.
+  So, $M^{T} = M\inv$.
+\end{proof}
+
+
+\end{document}

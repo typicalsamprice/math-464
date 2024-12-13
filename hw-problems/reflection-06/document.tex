@@ -1,0 +1,83 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+
+\author{Sam Price}
+\title{\reflectbox{Reflection Six}}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+This week has been actually quite productive in terms of math.
+I'll start with the success stories.
+I completed 5 exercises in the book!
+Most of them didn't take long at all and were scattered from differentiation to
+change-of-variables chapters, so I won't plan on presenting those ever.
+The problem that took the longest (and that I actually wrote up)
+was in the Implicit Function Theorem section, as number 5.
+Once I figured out the trick of creating $h(x) = [f(x) g(x)]$
+it was actually quite simple since the dimensions lined up correctly.
+After that, it was time for the actual week, and so I figured out the trick quite nicely
+for the problem you gave us! I wasn't entirely sure about the generalization, but figured
+if it \emph{locally} looked like the axes in $\RR[2]$, then one could translate them separately
+and still have it make some sort of sense. In any case, it didn't matter. All that I have left
+to do is explain why $f$ being bijective implies $f\inv(I) \cap f\inv(J) = f\inv(I \cap J)$.
+
+In terms of the struggles this past week, it mostly comes down to things being quite gnarly
+or notation clogging up intuition. When you were presenting a proof of Theorem 16.5
+(page 141, PDF page 154) from the book it definitely feels strange since, as mentioned, there
+are \emph{so} few cases any explicit partition of unity would be practical to do computations
+with. It's not hard to follow the proof beyond that aspect at least.
+
+Beyond that, I think it will take a little bit to adapt to the definition(s) of manifolds we've
+talked about so far. My exposure to them at this point has basically only been the perhaps cliche
+tagline of ``they look like Euclidean space'' when on a manifold. This is sort of what I meant
+when talking about projective varieties as 2-dimensional. They clearly aren't, they live in
+``three dimensions'' because they \emph{need} that space, but they locally look like $\RR[2]$
+just bent in a fancy way to be non-flat. This is what the whole $U \to V \cap X$ notation is suppose
+to exemplify though, so I think it will just take getting used to shifting to a more formalized
+notion to gain a greater understanding.
+
+For planning, I want to at least think about the 2-torus problem you gave us today as well.
+My approach for that will be to choose some specfic values for $r, R$ and then determine
+a couple charts for it. For the minimum, it intuitively feels like 8 would be the answer.
+That comes from each ``sliced'' part looking similar to the body of a cylinder,
+which needs 2 charts in some sense because it's like $S^{1}$. Since each quadrant would have these
+issues, it would be $4 \times 2 = 8$ charts to cover any $T^{2}$
+(were you drawing $\Pi^{2}$ on the board? I could not read it and should have clarified).
+
+For my presentation I'll try to whip something up in Beamer since I think it both
+looks the nicest for math, and is something I should learn in general.
+As a blueprint, I think it will be something like
+\begin{itemize}
+  \item What is a variety? Zero-sets of polynomials and a couple simple $\mathbb{A}^{2}$ examples.
+        In this case, is it correct to describe affine space as a place similar to where
+        we (as schoolkids) classically learned geometry, since there is distance but
+        any given point or line has no meaning of ``distance'' from any supposed origin?
+  \item Projective space, and visualizing $\PP[1]$ and $\PP[2]$.
+        Talk about why adding a point to $\CC$ at infinity is taken
+        as $\CC[2]/\negmedspace\sim$ instead of literally using $\CC \cup \set{\infty}$.
+        From what I can understand this whole time, it comes down to when we extend to
+        higher dimensions there is a need for different directions to infinity.
+
+  \item Why are homogeneous polynomials the subject in this setting?
+        Well, it's because of the relation we just endowed on $\CC[n]$.
+        We'd really like $f(x) = f(y) = 0$ if $x \sim y$. Other values might not be the same,
+        but that isn't really important since $f(x) = 0 \iff f(\lambda x) = 0$ for nonzero $\lambda$
+        and those are the points making up our varieties.
+
+  \item What is my goal with research?
+        Describe the parameter space (correct terminology?) of cubic surfaces in $\PP[19]$
+        and asking the question of how many of the 27 lines are real.
+
+  \item Show some pictures, Clebsch is a given and a couple others.
+\end{itemize}
+
+
+\end{document}

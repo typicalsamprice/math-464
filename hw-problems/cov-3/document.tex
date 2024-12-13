@@ -1,0 +1,41 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Math 464 Ex}
+
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\DeclareMathOperator{\vol}{vol}
+
+\begin{document}
+
+\maketitle
+
+Let $\pi_{k}$ be the $k$\textsuperscript{th} projection function.
+Let $S \subset \RR[n]$ be rectifiable and with nonzero volume.
+
+Define the \emph{centroid} of $S$ as the point $c(S) \in \RR[n]$ so that
+the $k$\textsuperscript{th} coordinate is
+\[ c_{k} = \frac{1}{\vol(S)}\int_{S}\pi_{k}. \]
+
+We say that $S$ is \emph{symmetric} with respect to the subspace $x_{k} = 0$ of $\RR[n]$ if
+\[ h(\vec{x}) = (x_{1}, \ldots, x_{k-1}, -x_{k}, x_{k+1}, \ldots, x_{n}) \]
+carries $S$ onto itself.
+
+\begin{proposition}{}{}
+  If $S$ is $k$-symmetric, then $c_{k}(S) = 0$.
+\end{proposition}
+
+\begin{proof}
+  Let $S$ be rectifiable and $k$-symmetric.
+  Let $S_{k} \subset \RR$ be the values that $x_{k}$ may take within $S$.
+  Since $S$ is symmetric, we know that for each $a \in S_{k}$ there must also be $-a$ present.
+\end{proof}
+
+
+
+\end{document}

@@ -1,0 +1,43 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\author{Sam Price}
+\title{Reflection 10: CRUNCH Time, brought to you by Nestl\'e}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+All the math I've done has been in the past four to five days.
+It has been fairly productive and been a good ol' learning time.
+The first problem I tidied up was the exercise showing that a crossed area can't be homeomorphic to $\RR$ (or any interval)
+and while most of the work was mostly complete, I rewrote most of it because I wasn't happy with it.
+The part I fixed (I hope this was the one at least) is just explaining why the four disconnected components can't map bijectively
+onto the two disconnected components of the punctured line. It comes down to missing at least two points, or overlap happening and so it's impossible.
+I'll also chunk through the algebra of showing $\rank D\det = 1$ so that the exercise I presented today is more complete.
+
+For my roadmap, I plan on doing (provided they take long enough/feel like there is some new insight I gain):
+\begin{itemize}
+  \item Exercise 5.24.5. Part (a) is to find some $f \from \RR[9] \to \RR$ so that $f\inv(0) = \Orth_{3}(\RR)$.
+        Then, Part (b) is to show that $\Orth_{3}(\RR)$ is a compact manifold without boundary.
+  \item Finish showing the determinant equivalence if I have the time.
+        Fall break I imagine I will though, since I will have my laptop and a couple notebooks only.
+  \item Ex. 4.20.1: If $h$ is an orthogonal transformation, then $h$ carries every orthonormal set to another orthonormal set.
+\end{itemize}
+
+To try to get differential forms more: when do we determine which point $p \in \M$ that $T_{p}\M$ is being derived from?
+I guess more sensibly, we have the notation $\omega$ and $\omega_{p}$ separately for specifying $p$. At what point does this distinction matter
+and change what $\omega$ is doing? Is $\omega$ itself on $T\M$ as a whole (or $T^{\ast}\M$ and $T^{\ast}_{p}\M$ respectively?)
+and then we drill down to $T_{p}\M$ itself and therefore we get $\omega_{p}$?
+I'm going to read a few sections of the textbook tomorrow to see if I can glean any more information.
+
+I don't have any other major hangups as of now, but I have a feeling I should be taking notes quicker rather than trying to get it
+typed -\ I can go back and tidy up or transfer from pen to screen later (and probably should for review anyways).
+That will be my big change for Thursday and beyond.
+
+
+\end{document}

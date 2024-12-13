@@ -1,0 +1,60 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{$\GL, \SL$ are manifolds.}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+First, let us consider $\GL_{n}(\RR)$.
+We can consider each $A \in \GL_{n}$ as an element of $\RR[n^{2}]$ by ``flattening'' the rows (or columns) into one vector.
+Of course, we know that
+\[ \underline{\GL_{n}(\RR) = \set{ A \in \mathcal{M}_{n}(\RR) \mid \det A \ne 0 }} \]
+Because $\det \from \RR[n^{2}] \to \RR$ is a polynomial, it must be continuous.
+Therefore, $\GL_{n} = \det\inv(\RR - \set{0})$ must be open as well.
+Because $\RR[n^{2}]$ is a manifold, it is charted.
+The restrictions of these charts to open subsets (intersections of $\RR[n^{2}]$ and $\GL$) of their domains keeps their desired properties (diffeomorphic, etc.) in check.
+Hence, $\GL_{n}$ is a manifold (in fact, this reasoning shows if $M$ is a manifold and $U \subset M$ is open, then $U$ is a manifold as well.)
+
+\begin{center}
+  \underline{Looking to $\SL_{n} = \set{ A \in \mathcal{M}_{n} \mid \det A = 1 }$}
+\end{center}
+Define $F(A) = \det A - 1$. Then, $\SL_{n} = F\inv(0)$.
+Also, $D\det$ has constant rank 1 on $\SL_{n}$ due to its nonzero determinant (it is 1 specifically, but it only requires nonzero-osity).
+Therefore, by the theorem below, it is a manifold that is the zero locus of the function $F \from \RR[1 + n^{2} - 1] \to \RR$ and so
+is of dimension $n^{2} - 1$.
+
+\begin{theorem}{Munkres 5.24, Part of Theorem in Exercise 2}{}
+  Let $f \from \RR[n + k] \to \RR[n]$ be of class $C^{r}$. Let $M = f\inv(0)$, and assume $M$ nonempty and that $\rank Df = n$ for all $x \in M$.
+  Then, $M$ is a $k$-manifold in $\RR[n + k]$.
+
+  [Rest of theorem omitted, as it is not used]
+\end{theorem}
+\begin{proof}
+  Let $(p, q) \in M$ so that $p \in \RR[k]$ and $q \in \RR[n]$.
+  Then, there is some $g \from U \to \RR[n]$ for an open $U \subset \RR[k]$ containing $p$ so that
+  \[ g(p) = q,\quad f(x, g(x)) = 0 \]
+  for all $x \in U$. We may further restrict this (since $g$ is $C^{r}$) so that the inverse function theorem may be applied;
+  therefore, $g$ is a chart on $M$ and as such $M$ is a $k$-manifold.
+\end{proof}
+
+\begin{proposition}{Determinant is nonsingular}{}
+  The function $\det \from \GL_{n} \to \RR[\times]$ has rank 1 Jacobian everywhere.
+\end{proposition}
+\begin{proof}
+  We know that since this is a $1 \times n^{2}$ matrix, it can only have rank zero when it \emph{is} the zero row matrix.
+  Consider $a_{11}$ in a given matrix $A$ that satisfies this. Its entry in $D\det$ is the determinant of the minor related to itself.
+  We only now need consider this first row in the matrix: every single one must be zero to let $D\det = 0$ get close to true.
+  This means that
+  \[ \det A = \sum_{i = 1}^{n}a_{1,n}M^{\ast} = 0 \]
+  where $M^{\ast}$ is the (determinant of the) minor determined by removing the first row and $i$th column of the input matrix.
+  However, this is not possible as we assumed $A$ is in $\GL_{n}$ and so has nonzero determinant.
+\end{proof}
+
+\end{document}

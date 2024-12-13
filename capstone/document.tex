@@ -1,0 +1,172 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Capstone: Inverse Function Theorem}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\section{Pre-IFT Work}
+
+This is normally done on any arbitrary complete metric space $X$, but I'd rather not also prove that contraction maps are necessarily continuous.
+\begin{theorem}{Banach Fixed-Point Theorem}{banach}
+  Let $f \from A \to A$ be a continuous\footnote{They are necessarily continuous, but I will require it for simplicity}
+  function on a closed subset $A \subset \RR[n]$ so that there is a fixed $q \in \lbrack 0, 1 \rparen$:
+  \[ \norm{f(x) - f(y)} \le q\norm{x - y} \]
+  for all $x, y \in \RR[n]$.
+  Then, there is a unique fixed point $x^{*}$.
+\end{theorem}
+\begin{proof}
+  Let $x_{0} \in A$ and define the sequence $\set{x_{n}}$ by $x_{n + 1} = f(x_{n})$.
+  We notice that
+  \[ \norm{x_{2} - x_{3}} \le q\norm{x_{1} - x_{2}} \le q^{2}\norm{x_{0} - x_{1}}. \]
+  Extrapolating this, we notice
+  \[ \norm{x_{n} - x_{n + 1}} \le q^{n}\norm{x_{0} - x_{1}}. \]
+  Let $\eps > 0$ now, and pick $N$ large enough so that
+  \[ q^{N} < \frac{\eps(1 - q)}{\norm{x_{0} - x_{1}}}. \]
+  For $m > n > N$, we find that
+  \begin{align*}
+    \norm{x_{n} - x_{m}} &\le \norm{x_{m} - x_{m - 1}} + \norm{x_{m - 1} - x_{m - 2}} + \cdots + \norm{x_{n + 1} - x_{n}}\\
+    &\le q^{m - 1}\norm{x_{0} - x_{1}} + q^{m - 2}\norm{x_{0} - x_{1}} + \cdots + q^{n}\norm{x_{0} - x_{1}}\\
+    &= q^{n}\norm{x_{0} - x_{1}} \sum_{k = 0}^{m - n - 1}q^{k}\\
+    &\le q^{n}\norm{x_{0} - x_{1}} \sum_{k = 0}^{\infty}q^{k}.
+  \end{align*}
+  The reason this is not a \emph{strict} inequality is that $q = 0$ is permitted.
+  Then, we find that
+  \[
+    q^{n}\norm{x_{0} - x_{1}} \sum_{k = 0}^{\infty}q^{k} = \frac{q^{n}}{1 - q}\norm{x_{0} - x_{1}}.
+  \]
+  Since $n > N$, we know $q^{n} \le q^{N}$. This tells us the right hand side has:
+  \[ \frac{q^{n}}{1 - q}\norm{x_{0} - x_{1}} < \frac{\eps(1 - q)}{(1 - q)\norm{x_{0} - x_{1}}}\norm{x_{0} - x_{1}} = \eps. \]
+  Because our sequence $\set{x_{n}}$ is Cauchy and $\RR[n]$ is complete, as proven by yours truly, we know that $\set{x_{n}} \to x^{*}$ for some $x^{*}$.
+  Suppose then there are two fixed points of $f$: $a, b \in A$. We find that
+  \[ \norm{a - b} > \norm{f(a) - f(b)} = \norm{a - b}. \]
+  This isn't possible though if $a \ne b$ and so we reach a contradiction, showing $x^{*}$ is unique.
+
+  The reason $A$ must be closed is so that every limit in $A$ converges to something inside $A$.
+  An open set might not have this property, and so we require it.
+\end{proof}
+
+\begin{lemma}{}{tao-contraction}
+  Let $g \from B_{r}(0) \to \RR[n]$ be a contraction map with constant $q = 1/2$ so that $g(0) = 0$.
+  Then, $f(x) = g(x) + x$ is injective and
+  \[ B_{r/2}(0) \subset f(B_{r}(0)). \]
+\end{lemma}
+\begin{proof}
+  Suppose first there are $x, y$ so $f(x) = f(y)$. This means that
+  \begin{align*}
+    x + g(x) &= y + g(y)\\
+    \implies \abs{g(x) - g(y)} &= \abs{y - x}.
+  \end{align*}
+  This means that $y - x = 0$, and so $y = x$. Thus, $f$ is injective.
+
+  Now, let $y \in B_{r/2}(0)$. We must now find some $x \in B_{r}(0)$ so that $f(x) = y$.
+  This is equivalent to finding $x$ so that $x = y - g(x)$, or $x$ being a fixed point of $x \mapsto y - g(x)$.
+  Call this map new map $F$, so $F(x) = y - g(x)$. Note for $x \in B_{r}(0)$ there is
+  \[ \abs{F(x)} \le \abs{y} + \abs{g(x)} \le \frac{r}{2} + \abs{g(x) - g(0)} \le \frac{r}{2} + \frac{1}{2}\abs{x - 0} < \frac{r}{2} + \frac{r}{2} < r. \]
+  So, $F(B_{r}) \subset B_{r}$.
+  We also have the inequality then for $x, x' \in B_{r}(0)$ that
+  \begin{equation}\label{eq:f-strict-contraction} \abs{F(x) - F(x')} = \abs{g(x) - g(x')} \le \frac{1}{2}\abs{x - x'}. \end{equation}
+
+  In fact, for a sufficiently small $\eps > 0$ we can have $r - \eps = s$ and
+  $f(\overline{B_{s}}) \subset \overline{B_{s}}$ is mapped to itself\footnote{Since we would end with $\abs{F(x)} < r - \eps$, by looking at $B_{s/2}$.},
+  since our inequality is strict there is some wiggle room.
+  Because $\overline{B_{s}}$ is complete, we may apply the Banach fixed-point theorem to $F$ by~\eqref{eq:f-strict-contraction},
+  and so our satisfactory $x$ so $f(x) = y$ is found. Therefore, $f(B_{r}) \supset B_{r/2}$.
+\end{proof}
+
+\begin{lemma}{[Skip if comfortable]}{linear-inversion-is-linear}
+  If $T \from \RR[n] \to \RR[n]$ is a linear transformation that is invertible,
+  then $T\inv$ is also linear.
+\end{lemma}
+\begin{proof}
+  We know that by taking $I = T\inv \circ T$, there is
+  \[ T\inv(T(T\inv(x) + T\inv(y))) = T\inv(T(T\inv x) + T(T\inv y))
+    = T\inv(x + y). \]
+  Further,
+  \[ a T\inv x = T\inv(T(a T\inv x)) = T\inv(a x). \]
+  So, $T\inv$ is linear.
+\end{proof}
+
+\section{The Inverse Function Theorem}
+
+\begin{theorem}{Inverse Function Theorem}{}
+  Let $f \from A \to \RR[n]$ with $A \subset \RR[n]$ open and $f \in C^{r}$.
+  If $x_{0} \in A$ has the property $Df(x_{0})$ is invertible, then there is some open $U \subset A$ about $x_{0}$ and $V \subset \RR[n]$ about $f(x_{0})$ so that
+  $f|_{U} \from U \to V$ is a bijection and the inverse map $f \inv \from V \to U$ exists and is differentiable at $x_{0}$. Further,
+  \[ Df\inv(f(x_{0})) = Df(x_{0})\inv. \]
+\end{theorem}
+\begin{proof}
+  We show that we only need to work in a special case where $x_{0} = 0$, $f(0) = 0$ and $Df(0) = I_{n}$.
+  Firstly, suppose $f(x_{0}) = 0$. If not, then create $\tilde{f}(x) = f(x) - f(x_{0})$.
+  We see that $D\tilde{f}(x_{0}) = Df(x_{0})$, and $\tilde{f}\inv(y - f(x_{0})) = f\inv(y)$ which means $D\tilde{f}\inv(0) = Df\inv(f(x_{0}))$, as desired.
+
+  Then, we may assume $x_{0} = 0$ by a similar construction. Take $\tilde{f}(x) = f(x + x_{0})$, and we see $D\tilde{f}(0) = Df(x_{0})$ and $f\inv(y) = \tilde{f}\inv(y) + x_{0}$
+  to arrive at $D\tilde{f}\inv(0) = Df\inv(0)$. Then
+  \[ D\tilde{f}\inv(0) = Df\inv(0) = Df(0)\inv = D\tilde{f}(0)\inv. \]
+
+  \newpage
+  Now, we must show that the assumption $Df(0) = I_{n}$ is okay. Define the function $\tilde{f}(x) = Df(0)\inv f(x)$.
+  We clearly see that $D\tilde{f}(0) = Df(0)\inv Df(0) = I_{n}$. By the special case, there are open $U' \ni 0$, $V' \ni 0$ with $\tilde{f}\inv \from V' \to U'$ differentiable at 0.
+  However, $f(x) = Df(0) \tilde{f}(x)$ and so $f \from U' \to Df(0) V'$.
+  Because $Df(0)$ is a bijection, $f$ must also be then.
+  The inverse $f\inv(y) = \tilde{f}\inv(Df(0)\inv y)$ must then be differentiable at zero as well.
+
+  Now we simply prove the inverse function theorem for $x_{0} = 0$, $f(0) = 0$ and $Df(0) = I$.
+  Define the function $g: A \to \RR[n]$ by $g(x) = f(x) - x$. Naturally, $g(0) = 0$, $Dg(0) = 0$ and $D_{i}g(0) = 0$.
+  Because $g \in C^{1}$, we may find a neighborhood $B = B_{r}(0)$ so that\footnote{We can bound each component by $1/2n$, and there are $n$ many of them.}
+  \[ \abs{D_{i}g(x)} \le \frac{1}{2n^{2}} \]
+  for all $x \in B$.
+  Taking the directional derivative on $B$ for $v = (v_{1}, \ldots, v_{n})$:
+  \begin{align*}
+    \abs{g'(x; v)} &= \abs{Dg(x)v}\\
+    &= \abs*{\sum_{i = 1}^{n}v_{i} \cdot D_{i}g(x)}\\
+    &= \sum_{i = 1}^{n}\abs{v_{i}} \abs{D_{i}g(x)}\\
+    &\le \sum_{i = 1}^{n}\frac{\abs{v}}{2n^{2}} = \frac{v}{2n}.
+  \end{align*}
+  By the fundamental theorem of calculus, we find that for $x, y \in B$
+  \[ g(y) - g(x) = \int_{0}^{1}\frac{d}{dt}g(x + t(y - x)) \]
+  which can be written on the left side as
+  \[ \int_{0}^{1} g'(x + t(y - x); y - x). \]
+  Since $Dg(x + t(y - x)) \cdot (y - x)$ gives a vector with entries $D_{i}g(x + t(y - x)) \cdot (y - x)$.
+
+  Each of these entries has magnitude at most $\frac{1}{2n} \abs{y - x}$ by our previous bound.
+  Chasing this bound around, it gives us that $g(y) - g(x)$ has components with the same bound of magnitude, and so we get
+  \[ \abs{g(y) - g(x)} \le \frac{1}{2}\abs{y - x}. \]
+  This means that $g$ is a contraction map with coefficient $1/2$, and so can be used in the previous lemma.
+  This means that our original $f(x) = g(x) + x$ is injective on some ball $B_{r}(0)$ whose image contains $B_{r/2}(0)$.
+  Restricting our $f$ to $f\inv(B_{r/2}(0)) \cap B_{r}(0)$, we get a function that is bijective around 0, and so an inverse function is well-defined.
+
+  Using the bounds of contraction with $g$, we see for $x \in B_{r}(0)$:
+  \begin{align}
+    \label{eq:contraction-bounds}
+    \begin{split}
+      \abs{g(x) - g(0)} &= \abs{g(x)} \le \frac{1}{2}\abs{x}\\
+      \implies
+      \frac{1}{2}\abs{x} &\le \abs{f(x)} \le \frac{3}{2}\abs{x}.
+    \end{split}
+  \end{align}
+
+  To show $f\inv$ is differentiable at zero\footnote{Maybe replace $x$ with $h$, especially when presenting.} (with derivative $I$), we want
+  \[ \lim_{x \to 0} \frac{\abs{f\inv(x) - f\inv(0) - I(x - 0)}}{\abs{x}} = 0 \]
+  which because $f(0) = 0$, then $f\inv(0) = 0$, giving:
+  \[ \lim_{x \to 0} \frac{\abs{f\inv(x) - x}}{\abs{x}} = 0. \]
+  We will show that this is true for a sequence $\set{x_{n}} \to 0$ in $V$. Define the sequence $y_{n} = f\inv(x_{n})$.
+  Using our bounds in~\eqref{eq:contraction-bounds}, we can say that $y_{n} \to 0$ as well. So, it is equivalent to then show
+  \[ \lim_{n \to \infty}\frac{\abs{y_{n} - f(y_{n})}}{\abs{y_{n}}} = 0 \]
+  However, $f$ is differentiable at zero, and so we \emph{know}
+  \[ \lim_{n \to \infty}\frac{\abs{f(y_{n}) - f(0) - Df(0)(y_{n} - 0)}}{\abs{y_{n}}} = 0. \]
+  We know that $Df(0) = I$ and $f(0) = 0$ though, and so
+  \[ \lim_{n \to \infty}\frac{\abs{f(y_{n}) - y_{n}}}{\abs{y_{n}}} = 0. \]
+  Thus, $Df\inv(0) = I$.
+\end{proof}
+
+
+
+\end{document}

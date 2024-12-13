@@ -1,0 +1,544 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\date{Last Updated \today}
+\title{Advanced Calculus Notes}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\section{Linear Algebra}
+
+\subsection{Determinants}
+
+\section{Derivatives}
+
+\subsection{Inverse Function Theorem}
+
+This is my capstone theorem.
+
+\subsection{Implicit Function Theorem}
+
+\section{Integrals}
+
+\begin{definition}{Rectifiable Sets}{rectifiable}
+  A set $S \subset \RR[n]$ is \emph{rectifiable} if and only if
+  $S$ is bounded and $\Bd S$ is measure zero.
+\end{definition}
+
+
+\subsection{Extended Integrals}
+
+\subsection{Change of Variables}
+
+\subsubsection{Isometries}
+
+An isometry is a transformation $h \from \RR[n] \to \RR[n]$ such that distances are preserved.
+Generally doesn't necessarily hold, but this will be true over $n$-dimensional vector spaces over $\RR$.
+Formally, this means that for a metric $d$ over $\RR[n]$, there is
+\[ d(x, y) = d(h(x), h(y)). \]
+
+An \emph{orthogonal} transformation is a transformation such that angles (dot products) are preserved in $\RR[n]$.
+These are the linear transformations whose defining matrix has columns that are an \emph{orthonormal basis}.
+
+\begin{theorem}{}{isometry-is-affine}
+  For $h \from \RR[n] \to \RR[n]$, $h$ is an isometry if and only if $h(x) = Ax + p$
+  for some fixed $A \in \Orth(n)$ and $p \in \RR[n]$.
+\end{theorem}
+
+Furthermore, these seem quite related and so:
+
+\begin{theorem}{}{iso-zero-fixed-iff-ortho-and-dp-preserved}
+  If $h \from \RR[n] \to \RR[n]$ and $h(0) = 0$, then $h$ is an isometry if and only if
+  \begin{enumerate}[start=1,label={\arabic*\rparen}]
+    \item $h$ preserves dot products. That is, $\angles{x, y} = \angles{h(x), h(y)}$, and
+    \item $h$ is an orthogonal transformation.
+  \end{enumerate}
+\end{theorem}
+
+\begin{lemma}{}{}
+  Let $A \subset \RR[n]$ be open and $f \from A \to \RR$ be continuous.
+  If $f$ vanishes outside a compact subset $C \subset A$, then
+  \[ \int_{A}f = \int_{C}f. \]
+\end{lemma}
+\begin{proof}
+  Since $C$ is bounded and $f\mid_{C}$ is continuous, then $\int_{C}f$ exists.
+  Choose $\set{C_{i}}$ compact, rectifiable sets that cover $A$ so that $C_{i} \subset \Int C_{i + 1}$.
+  So, there is some $N$ so that $C \subset C_{N}$.
+  Thus,
+  \[ \int_{C}f = \int_{C_{n}}f \quad\forall n \ge N. \]
+  Because $\pars*{\int_{C_{n}}f} \to \int_{C}f$ and $(C_{i}) \to A$, we see
+  \[ \int_{C}f = \int_{A}f. \]
+\end{proof}
+
+\begin{theorem}{}{}
+  Let $A \subset \RR[n]$ be open, $f \from A \to \RR$ continuous and $\set{\phi_{i}}$ be a partition of unity.
+  Then $\int_{A}f$ exists if and only if
+  \[ \sum_{i = 1}^{\infty}\int_{A}\phi_{i}\abs{f}, \]
+  in which case
+  \[ \int_{A}f = \sum_{i = 1}^{\infty}\int_{A}\phi_{i}f. \]
+\end{theorem}
+\begin{proof}
+  Assume $f = \abs{f}$. Let $D \subset A$ be compact and rectifiable.
+  Then, there is some $M \in \NN$ so that for $m > M$, $\phi_{m} = 0$  on $D$.
+  In fact, $f_{D}(x) = \pars{\sum_{i = 1}^{M}\phi_{i}f}(x)$.
+  Thus,
+  \begin{align*}
+    \int_{D}f &= \sum_{i = 1}^{M}\pars*{\int_{D}\phi_{i}f}\\
+    &\le \sum_{i = 1}^{M}\pars*{\int_{D \cup \Support \phi_{i}} \phi_{i}f}\\
+    &= \sum_{i = 1}^{M}\pars*{\int_{A}\phi_{i}f}\\
+    &\le \sum_{i = 1}^{\infty}\pars*{\int_{A}\phi_{i}f}.
+  \end{align*}
+
+  Since the last inequality is an upper bound for $\int_{D}f$, we know that if the former exists then
+  \[ \int_{A}f = \sum_{i = 1}^{\infty}\pars*{\int_{A}\phi_{i}f}. \]
+
+  Now suppose $\int_{A}f$ exists. Given $N \in \NN$, set $D = \bigcup_{i \le N} \Support \phi_{i}$.
+  For $i \le N$, there is
+  \[ \int_{A}\phi_{i}f = \int_{D}\phi_{i}f \]
+  since each $\phi$ vanishes outside $D$ on $A$. Then, we have
+  \begin{align*}
+    \sum_{i = 1}^{N}\pars*{\int_{A}\phi_{i}f} &= \sum_{i = 1}^{N}\pars*{\int_{D}\phi_{i}f}\\
+    &= \int_{D}\sum_{i = 1}^{N}\phi_{i}f\\
+    &= \int_{D}f.
+  \end{align*}
+  Since the integral on $D$ must be less than (or equal to) the extended integral on $A$,
+  we use the fact that $f = \abs{f}$ and so the first sum must converge in $\RR$ as it is monotone.
+\end{proof}
+
+\section{Manifolds}
+
+We want to, in some sense, ``do calculus'' on subsets of $\RR[n]$.
+
+\begin{definition}{Regular Parametrized Curve}{reg-param-curve}
+  A regular parametrized curve is a map $\alpha \from I \to \RR[n]$ where
+  $I \subset \RR$ is open, $\alpha$ is smooth and $\D\alpha \ne 0$ for any $t \in I$.
+\end{definition}
+
+
+\begin{definition}{Manifold Prototype I}{manifold-proto-i}
+  A 1-manifold is a set $X \subset \RR[n]$ which is \underline{locally}
+  an injective regular parametrized curve.
+\end{definition}
+
+This means for a manifold $X$, locally for all $p \in X$,
+there is some open $U \subset \RR[n]$ so that
+\[ \alpha \from I \to U \cap X \]
+is such an injective regular parametrized curve (IRPC).
+
+%%%%%%%%%%%
+
+\begin{example}{Exercise}{}
+  Prove that the union of the $x$ and $y$ axes is not diffeomorphic to a line.
+\end{example}
+\begin{proof}
+  Let $A = V(xy)$ be the union of the axes.
+  Suppose there was some diffeomorphism $f \from \RR \to A$.
+  Since $f$ is continuous and bijective, let $I = f\inv(I')$ and $J = f\inv(J')$ where
+  \[ I' = \set{ (x, y) \in A \mid x \in (-1, 1) } \]
+  and
+  \[ J' = \set{ (x, y) \in A \mid y \in (-1, 1) }. \]
+  Because $f$ is $C^{1}$, we know both $I$ and $J$ are open.
+  Clearly, $I' \cap J' = \set{0}$. Therefore, $I \cap J$ must not be empty as well.
+  However, intersection of open sets is also open and so there must be more than one
+  point common to the two sets.
+  This contradicts the injective nature of $f$ and so they cannot be diffeomorphic.
+\end{proof}
+
+%%%%%%%%%%%
+
+\begin{definition}{Manifold Prototype II}{manifold-proto-ii}
+  A 2-manifold is a set $X \subset \RR[n]$ which is locally defined by
+  an injective, regular and smooth parametrized surface.
+
+  \[ \forall p \in X, \exists U \subset \RR[2], \alpha \from U \to V \cap X \]
+  with $U$ open and connected, and $V$ open and connected in $\RR[n]$.
+\end{definition}
+
+\begin{example}{Exercise}{}
+  Define  $T^{2} = F\inv(0)$.
+  \[ F = \pars{\sqrt{x^{2} + y^{2}} - R}^{2} + z^{2} - r^{2}. \]
+  With $R, r > 0$.
+
+  Find local charts which cover $T^{2}$, find the minimum needed,
+  and prove that $T^{2}$ cannot be globally parametrized.
+\end{example}
+
+%%%%%%%%%%%%
+
+\begin{definition}{Manifold Without Boundary}{manifold-no-bd}
+  Let $k > 0$. A $k$-manifold of class $C^{r}$ is a subset $M \subseteq \RR[n]$ (with induced topology)
+  such that for all $p \in M$ there is an open $V \subseteq M$ containing $p$, an open subset $U \subseteq \RR[k]$ and a map
+  \[ \alpha \from U \to V \]
+  so that
+  \begin{itemize}
+    \item $\alpha$ is a diffeomorphism
+    \item $\alpha$ is $C^{r}$
+    \item $D\alpha(x)$ has rank $k$ for all $x \in U$.
+  \end{itemize}
+\end{definition}
+
+\textbf{Remark}:
+  When $r = 0$, they are called \emph{topological manifolds}.
+  We take $r \ge 1$, and eventually will get to $r = \infty$.
+  In fact when $k = 0$, then $M$ is a set of discrete points.
+
+The pair $(\alpha, U)$ is sometimes called a \emph{coordinate patch} or \emph{chart}.
+In fact, there are a couple more definitions (with $k, M$ defined as normal)
+\begin{enumerate}[start=1,label={\arabic*\rparen}]
+  \item[Explicit, 1\rparen]
+        $\forall p \in M$, there is a neighborhood $W \subset M$ of $p$ so that $W$ is the graph
+        of a $C^{r}$ function $f \from V \to \RR[n - k]$ where $V \subset \RR[k]$ is open.
+        That is,
+        \[ W = \set*{ \binom{x}{f(x)} \Big| x \in \RR[k], f(x) \in \RR[n - k] }. \]
+
+  \item[Implicit, 2\rparen]
+        $\forall p \in M$ there is a neighborhood $W \subset \RR[n]$ of $p$ and
+        a $C^{r}$ function $F \from W \to \RR[n - k]$, such that $F\inv(0) = W \cap M$
+        and $\rank DF = n - k$.
+\end{enumerate}
+
+\begin{theorem}{}{manifolds-equiv}
+  The three definitions of a manifold given before are equivalent,
+  with the first referred to as ``Parametric''.
+\end{theorem}
+\begin{proof}
+  (Implicit $\implies$ Explicit)
+  Let $M$ be an implicit manifold.
+  Write $F = F(\vec{x}, \vec{y})$ with $\vec{x} \in \RR[k], \vec{y} \in \RR[n - k]$
+  and without loss of generality (automorphism of $\RR[n]$) we may assume
+  \[ \det \frac{\partial F}{\partial \vec{y}}(p) \ne 0. \]
+  By the implicit function theorem, there is a $C^{R}$ function $\phi \from U \to V$
+  (with $U, V$ a neighborhood of the correct parts of $p$)
+  so that $\phi(\vec{x}) = \vec{y}$ and $F(\vec{x}, \phi(\vec{x})) = 0$ on all of $U$.
+
+  Shrinking $W$ if needed, we know
+  \[ (\vec{x}, \vec{y}) \in M \cap W \iff \vec{y} = \phi(\vec{x}). \]
+  This means that $M \cap W$ is in fact the $W$ from the explicit case.
+
+  (Explicit $\implies$ Parametric)
+  Let $M$ be an explicit manifold given by $W, V, f$.
+  Then by the inverse function theorem we may define an appropriate $\alpha$ so that
+  \[ \alpha(x) = \binom{x}{f(x)}. \]
+  We know $\alpha$ is bijective, and is bicontinuous by the inverse function theorem
+  and the fact that
+  \[ D\alpha = \begin{bmatrix} I_{k} & 0\\ 0 & Df \end{bmatrix} \]
+  which has rank $k$.
+
+  (Parametric $\implies$ Implicit)
+  Let $p \in M$. Construct $\alpha \from U \to M$ a diffeomorphism with its image.
+  Further, by automorphisms of $\RR[k]$ we may assume $\alpha(0) = p$.
+\end{proof}
+
+\begin{example}{}{}
+  Let $\alpha(t) = (t + t^{2} \ t^{2} \ t^{3})$.
+  \begin{enumerate}[start=1,label={\arabic*\rparen}]
+    \item Check $\alpha$ gives a 1-manifold, where $\alpha(\RR) = M$.
+    \item Find nbhd of zero so that $M \cap W$ is the zero set $F(x) = 0$.
+    \item Is this gobally true (no, explain). Find the others.
+  \end{enumerate}
+\end{example}
+
+\subsection{Manifolds with Boundary}
+
+\begin{definition}{}{differentiable-on-arb-set}
+  Let $S \subset \RR[k]$ be and $f \from S \to \RR[n]$.
+  We say $f$ is $C^{r}$ if $f$ can be extended to a $C^{r}$ function on an open set $U \supset S$.
+\end{definition}
+
+\begin{lemma}{}{}
+  Let $S \subset \RR[k]$, $f \from S \to \RR[n]$.
+  If for each $x \in S$ we have an open $U_{x}$ and a $C^{r}$ function $g_{x} \from U_{x} \to \RR[n]$
+  such that $g_{x}|_{S \cap U_{x}} = f|_{S \cap U_{x}}$, then $f$ is $C^{r}$.
+\end{lemma}
+\begin{proof}
+  Cover $S$ with our $\set{U_{x}}$. Let $A = \bigcup U_{x}$ and choose $\set{\phi_{i}}$
+  be a partition of unity for $A$ subordinate to $\set{U_{x}}$.
+  Set $U_{i}$ to be one of the $U_{x} \supset \Support \phi_{i}$.
+  Take any $C^{r}$ function $g_{i} \from U_{i} \to \RR[n]$,
+  and extend it to $h_{i} \from A \to \RR[n]$ by letting $h_{i} = \phi_{i}g_{i}$ which is still $C^{r}$.
+
+  Define
+  \[ g(x) = \sum_{i = 1}^{\infty}h_{i}(x) \]
+  which is in fact $C^{r}$ on all of $A$.
+  Further,
+  \[ g(x) = \sum \phi_{i}g_{i} = \sum \phi_{i}f = f \sum \phi_{i} = f \]
+  when restricted to $S$.
+\end{proof}
+
+\begin{definition}{}{}
+  Define
+  \[ \mathbb{H}^{k} = \set{ x \in \RR[k] \mid x_{k} \ge 0 } \]
+  and
+  \[ \mathbb{H}_{+}^{k} = \set{ x \in \RR[k] \mid x_{k} > 0 }. \]
+  These are the ``upper half-planes'' of $\RR[k]$ both open and closed.
+\end{definition}
+
+\begin{definition}{Ultimate Manifold (Final Final Ver3)}{}
+  Let $k > 0$.
+  A $k$-manifold $M$ of class $C^{r}$ is a topological subspace of $\RR[n]$ such that
+  \begin{enumerate}[start=1,label={\arabic*\rparen}]
+    \item For any $p \in M$, there is an open neighborhood $V \subset M$,
+          an open $U$ in either $\RR[k]$ \emph{or} $\mathbb{H}^{k}$
+          and a bijective map $\alpha \from U \to V$.
+    \item $\alpha$ is $C^{r}$.
+    \item $\alpha\inv$ is continuous.
+    \item $D\alpha(x)$ has rank $k$ for all $x \in U$.
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}{}{}
+  Let $M \subset \RR[n]$ and $(\alpha, U)$ be a chart.
+  If $U_{0} \subset U$ is open, then $\alpha|_{U_{0}} \from U_{0} \to \alpha(U_{0}) \subset V$ is also a chart.
+\end{lemma}
+
+\begin{theorem}{}{}
+  Let $M \subset \RR[n]$ be a $k$-manifold of class $C^{r}$,
+  and $(\alpha, U), (\beta, V)$ so that $\alpha(U) \cap \beta(V) \ne \emptyset$.
+  We can define an isomorphism between $U, V$ by the composition $\alpha \circ \beta\inv$.
+\end{theorem}
+
+\begin{definition}{Pre-Manifold}{}
+  A pre-manifold $M$ is a topological space with a cover of charts
+  \[ \alpha \from U \subset \RR[n] \to M \]
+  which are locally homeomorphic, with $C^{r}$ transition functions.
+  Assume $M$ is Hausdorff and second countable.
+  The $n$ in $\RR[n] \supset U$ is the dimension of $M$.
+\end{definition}
+
+\begin{theorem}{Whitney's embedding theorem}{whitney}
+  An abstract manifold of dimension $n$ can be embedded
+  in $\RR[2n]$, where $2n$ is a sharp bound.
+\end{theorem}
+
+There are specific words to describe the relationship between
+the class of transition functions and their manifolds.
+I will not list them here.
+
+\begin{definition}{Boundary of a Manifold}{mfld-boundary}
+  Let $M \subset \RR[n]$ be a $k$-manifold and $p \in M$.
+  $p$ is interior if there is a chart $\alpha \from U \to V$ with $p \in V$
+  so that $U$ is open in $\RR[k]$.
+  Otherwise, $p$ is a boundary point.
+  We denote the set as
+  \[ \partial M = \set*{ p \in M \mid p \text{ not interior to } M } \]
+\end{definition}
+
+If we disregard the subspace topology, $\Bd S^{1} = S^{1}$ and $\partial S = \emptyset$.
+However they are the same if we take the subspace topology.
+
+\begin{proposition}{}{}
+  $M \subset \RR[n]$ is a $k$-manifold.
+  If $\partial M \ne \emptyset$, then $\partial M$ is a $(k - 1)$-manifold
+  without boundary. Both manifolds are of class $C^{r}$.
+\end{proposition}
+\begin{proof}
+  Let $p \in \partial M$ and choose a chart $\alpha \from U \to V$, which means
+  $U$ is open in $\mathbb{H}^{k}$ and not open in $\RR[k]$.
+  Then $\exists x \in \partial\mathbb{H}^{k}$ so that $p = \alpha(x)$.
+  Note that $\alpha(U \cap \mathbb{H}_{+}^{k})$ are interior to $M$,
+  and so $\alpha(U \cap \partial \mathbb{H}^{k})$ are all boundary to $M$.
+  Thus $\alpha\from U \cap \partial \mathbb{H}^{k} \to V \cap \partial M$ is a bijection.
+
+  Set $U_{0} \subset \RR[k - 1]$ to be the open set so that
+  \[ U_{0} \times \set{0} = U \cap \partial \mathbb{H}^{k} \]
+  with $x \in U_{0}$ and $\alpha(x) = \alpha_{0}(x, 0)$.
+  We show that $\alpha_{0}$ is a chart.
+  \begin{itemize}
+    \item $\alpha_{0}$ is a restriction and so is $C^{r}$.
+    \item $D\alpha_{0}$ has rank $k - 1$.
+    \item $\alpha_{0}\inv$ is simply $\pi \circ \alpha\inv$
+          with $\pi \from U \to \RR[k - 1]$ being a projection map.\ \qedhere
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{}{}
+  Let $U \subset \RR[n]$ be open and $f \from U \to \RR$ be of class $C^{r}$.
+  Set $M = f\inv(\set{0})$ and $N = f\inv(\lbrack0, \infty\rparen)$.
+  If $M \ne \emptyset$ and $\rank Df = 1$ on $M$, then
+  $N$ is an $n$-manifold and $\partial N = M$.
+\end{theorem}
+\begin{proof}
+  Pick $p \in N$ so that $f(p) > 0$ (i.e., $p$ is interior to $N$).
+  Let $U = \set{ x \in \RR[n] \mid f(x) > 0 }$.
+  Thus $\id[U]$ is a chart of the nonzero points of $N$.
+  If $f(p) = 0$, then since $\rank Df = 1$ at these points, we assume
+  without loss of generality that $D_{n}f(p) \ne 0$.
+
+  Define $F \from U \to \RR[n]$ by
+  \[ (x_{1}, \ldots, x_{n}) \to (x_{1}, \ldots, x_{n - 1}, f(x)). \]
+  Therefore,
+  \[ DF = \begin{bmatrix} I_{n - 1} & 0\\
+    0 & D_{n}f \end{bmatrix}. \]
+  Which has full rank and is thus invertible at $p$.
+  Therefore, we can get $A, B \subset \RR[n]$ and $F\inv$ is a diffeomorphism
+  with
+  \[ F|_{A \cap M} \from A \cap M \to B \cap \partial \mathbb{H}^{n}. \qedhere \]
+\end{proof}
+
+\begin{corollary}{}{}
+  The $n$-ball $B^{n}$ is a manifold with boundary $S^{n}$.
+\end{corollary}
+
+\begin{example}{Exercise}{}
+  $\GL(n, \RR)$, $\SL(n, \RR)$ defined as usual.
+  Show they are both manifolds.
+
+  Hint: $\dim \GL_{n} = n^{2}$ and $\dim \SL_{n} = n^{2} - 1$.
+
+  Bonus: Try to check multiplication and inversion are smooth.
+  These are examples of \emph{real Lie groups}.
+\end{example}
+
+\section{Tangent Spaces}
+
+\subsection{Tangent Space to $\RR[n]$}
+
+\begin{definition}{Tangent Space of $\RR[n]$}{tgsp-Rn}
+  Fix some $p \in \RR[n]$.
+  The \emph{tangent space} to $\RR[n]$ at $p$ is
+  the vector space $T_{p}\RR[n]$ of pairs $(p, \vec{v})$
+  with $\vec{v} \in \RR[n]$.
+
+  The addition is defined as
+  \[ (p, \vec{v}) + (p, \vec{w}) = (p, \vec{v} + \vec{w}). \]
+  Scalar multiplication is also second-slot only, so
+  \[ \lambda(p, \vec{v}) = (p, \lambda\vec{v}). \]
+\end{definition}
+
+In $\RR[n]$ this looks like a translation so the origin is moved to $p$.
+
+Suppose we now have $\gamma(t) \from I \to \RR[n]$ as a $C^{r}$ parametrized curve.
+So, the tangent vector to $\gamma(I)$ at $\gamma(t')$ is $(\gamma(t'); D\gamma(t'))$.
+
+\begin{definition}{}{differential}
+  Let $U \subset \RR[k]$ be open (in $\RR[k]$ or $\mathbb{H}^{k}$)
+  and $\alpha \from U \to \RR[n]$ be $C^{r}$.
+  If $x \in U$ and $p = \alpha(x)$, then
+  \[ \alpha_{*} \from T_{x}\RR[k] \to T_{p}\RR[n] \]
+  where
+  \[ (x, \vec{v}) \mapsto (\alpha(x), D\alpha(x) \cdot \vec{v}). \]
+  This $\alpha_{*}$ is sometimes called the \emph{pushforward} or
+  \emph{differential} of $\alpha$.
+\end{definition}
+
+If $A \xrightarrow{\alpha} B$ and $B \xrightarrow{\beta} \RR[n]$,
+then $A \xrightarrow{\beta \circ \alpha} \RR[n]$ exists.
+Then, $T_{p}A \xrightarrow{\alpha_{*}}$
+
+\begin{definition}{Tangent Space}{tgt-space}
+  $M \subset \RR[n]$ will be a $C^{r}$ $k$-manifold.
+\end{definition}
+
+\begin{example}{Exercise (2 POINTS)}{}
+  Compute explicit equations for the tangent space at either:
+  \begin{itemize}
+    \item two distinct points with different charts.
+    \item the same point with two different charts.
+          Then, give the inverse $D(\alpha_{2}\inv \circ \alpha_{1})$ explicitly.
+  \end{itemize}
+
+  For the surfaces:
+  \begin{itemize}
+    \item $\displaystyle \pars*{\frac{x}{a}}^{2} + \pars*{\frac{y}{b}}^{2} + \pars*{\frac{z}{c}}^{2} = 1$.
+    \item $\displaystyle \pars*{\frac{x}{a}}^{2} + \pars*{\frac{y}{b}}^{2} - z = 0$.
+    \item $\displaystyle \pars*{\frac{x}{a}}^{2} - \pars*{\frac{y}{b}}^{2} - z = 0$.
+    \item $\displaystyle \pars*{\frac{x}{a}}^{2} + \pars*{\frac{y}{b}}^{2} - \pars*{\frac{z}{c}}^{2} = \pm 1$.
+  \end{itemize}
+\end{example}
+
+To get the transition functions from two charts explicitly, let us take $\alpha_{1}, \alpha_{2} \from \RR[2] \to S^{2}$ so that $\alpha_{1}$ parametrizes the $z$ coordinate, and $\alpha_{2}$ the $y$.
+Clearly, the inverses of both are the projections of the corresponding coordinates; the third isn't messing with them at all.
+Therefore,
+\[ (\alpha_{2}\inv \circ \alpha_{1}) \begin{pmatrix} x \\ y \end{pmatrix}
+  = \alpha_{2}\inv \begin{pmatrix} x \\ y \\ \sqrt{1 - x^{2} - y^{2}} \end{pmatrix}
+  = \begin{pmatrix} x \\ \sqrt{1 - x^{2} - y^{2}}. \end{pmatrix}
+\]
+
+\begin{theorem}{}{}
+  Let $M \subset \RR[n]$ be implicitly defined by $F = 0$ locally.
+  For $p \in W \subset M$, $W$ must be described by $F = 0$.
+  Then,
+  \[ T_{p}M = \ker DF(p). \]
+\end{theorem}
+
+\begin{example}{}{}
+  Compute the volume formula for a regular parametrized 3-manifold living in $\RR[4]$. That is,
+  \[ M = \alpha(\RR[3]) \]
+  and
+  \[ \alpha(x, y, z) = (x, y, z, f(x, y, z)). \]
+\end{example}
+
+\section{Differential Forms}
+
+A differential 1-form is a smooth function from $\M \to T^{\ast}\M$, or in a specific case $\RR[n] \to (p, \pars{T_{p}\RR[n]}^{\ast})$.
+
+\begin{definition}{Differential $k$-form}{}
+  A differential $k$-form at $p \in \M$ is a function
+  \[
+    \omega \from \underbrace{T_{p}\M \times \cdots T_{p}\M}_{k \text{ times }} \to \RR
+  \]
+  where $\omega$ is both multilinear and alternating.
+  We call this vector space of functions $A^{k}(V)$ where $V$ is the underlying vector space (above, $T_{p}\M$.)
+\end{definition}
+
+\begin{example}{Differental forms}{}
+  A 2-form on $\RR[3]$ is an element in $A^{2}(\RR[3])$. For instance,
+  \[ \Theta_{(1, 2)}(\vec{v}, \vec{w}) = \det \begin{bmatrix} v_{1} & w_{1} \\ v_{2} & w_{2} \end{bmatrix} \]
+  In general for an index set $I \subset \set{1, \ldots, n}$ we can pick out $\abs{I}$ rows of the $n \times \abs{I}$ matrix.
+  So, we can craft (where $\abs{I} = k \le n$.)
+  \[ \Theta_{I} \from \underbrace{\RR[n] \times \cdots \times \RR[n]}_{k \text{ times }} \to M_{k \times k} \]
+\end{example}
+
+\begin{proposition}{}{}
+  Given any $\phi \in A^{k}(\RR[n])$, we may write
+  \[ \phi = \sum_{I} a_{I} \Theta_{I} \]
+  where $a_{I}$ are unique numbers.
+\end{proposition}
+
+\begin{example}{Exercise}{}
+  Prove that
+  \[ \sum_{\sigma \in S_{k}} (\operatorname{sgn} \sigma) v_{i_{1}, \sigma(1)} \cdot \cdots \cdot v_{i_{k}, \sigma(k)} = \Theta_{(i_{1}, \ldots, i_{k})}(v_{1}, \ldots, v_{k}) \]
+  It will be easier to show this for $n \times n$ matrices and $\det$ (where you use $\det [v_{1}, \ldots v_{k}]$ with $k$ rows chosen).
+\end{example}
+
+\begin{definition}{Wedge Product}{wedge-prod}
+  Let $\Theta_{I} \in A^{k}(\RR[n]), \Theta_{J} \in A^{\ell}(\RR[n])$. Then,
+  \[ \Theta_{I} \wedge \Theta_{J} = \Theta_{(I, J)}. \]
+  That is, $\wedge \from A^{k}(V) \times A^{\ell}(V) \to A^{k + \ell}(V)$.
+\end{definition}
+\begin{example}{}{}
+  Define
+  \begin{align*}
+    \omega = 5\Theta_{1} - 2\Theta_{2} + \Theta_{3}\\
+    \eta = 2\Theta_{(1, 2)} + \Theta_{(2, 3)}.
+  \end{align*}
+  Then,
+  \[ \omega \wedge \eta =
+    10(\Theta_{1} \wedge \Theta_{(1, 2)}) + 5(\Theta_{1} \wedge \Theta_{(2, 3)}) - 4(\Theta_{2} \wedge \Theta_{(1, 2)})
+    - 2(\Theta_{2} \wedge \Theta_{(2, 3)}) + 2(\Theta_{3} \wedge \Theta_{(1, 2)}) + \Theta_{3} \wedge \Theta_{(2, 3)}.
+  \]
+  This can be collapsed, as $\Theta_{I} \wedge \Theta_{J} = 0$ when $I$ and $J$ are not disjoint.
+  We get $5\Theta_{(1, 2, 3)} + 2\Theta_{(3, 1, 2)}$ and by transposing indices and keeping track of the sign, the final answer is $7\Theta_{(1, 2, 3)}$.
+\end{example}
+
+\begin{proposition}{}{}
+  The wedge product is
+  \begin{enumerate}[start=1,label={\arabic*\rparen}]
+    \item bilinear: $(\omega + \phi) \wedge \eta = \omega \wedge \eta + \phi \wedge \eta$ (with $\omega, \phi$ in the same space).
+    \item skew-commutative: $\omega \wedge \eta = \pars{-1}^{k\ell}(\eta \wedge \omega)$
+    \item associative.
+  \end{enumerate}
+\end{proposition}
+
+Globalizing this to manifolds is the next step.
+We define
+\[ \Omega^{k}(U) = \set*{ \mbox{\text{ differentiable $k$-forms on $U$ }} } \]
+
+\end{document}

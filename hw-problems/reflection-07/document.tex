@@ -1,0 +1,85 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\author{Sam Price}
+\title{Only Reflection Seven\\\Large{Not Reflection Eight}}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+This week was rough in terms of math.
+Everything was due today across so many classes, so let's start with the midterm.
+
+I spent a lot of time on the midterm; it ate up the majority of my days Friday to Sunday,
+usually from 10 to 5 or so, depending on what I had going on.
+As I do more and more linear algebra it becomes obvious to me that
+(a) I really need to take the class with you next semester, and
+(b) that it \emph{always} comes down to counting elements in a basis
+and doing something clever with them. It makes sense, because that is quite literally the basis,
+pun intended, of linear algebra for the most part.
+When looking at orthogonal complement stuff, it in fact was Gilbert Strang's
+little four-subspaces diatribe that I ended up reading, so the picture you drew was definitely
+the one that was familiar to me. I agree though in that the picture doesn't really elucidate
+anything more than the words already do.
+
+Besides the first problem and my struggle to generalize at the end of the second
+(which I want to see more explicitly when we go over the midterm)
+the midterm was just a lot of thinking rather than trying to write down things explicitly.
+The third problem felt the best, although as I'm sure you'll notice I get a little hand-wavy
+in that I mostly just\ldots ignore the differential forms
+and fall back on our current integral notation.
+If it's proper and we can treat those differential forms as commutative with the functions,
+then it's all fine and nothing really goes wrong.
+
+Iain and I did work on a couple problems.
+As you mentioned, $\abs{x}$ integrated twice would be a sufficient $C^{2}$
+but not $C^{3}$ function.
+I wrote it up but since you gave a solution I won't try presenting it.
+We also figured out the cross not being homeomorphic to a line:
+I'll present this later but it boiled down to when the origin is removed,
+there are four disconnected components of the axes and only two on $\RR$.
+Since the number of connected components needs to be preserved under a homeomorphism,
+these curves are not homeomorphic. Four explicit disjoint open sets are given to show why
+the cross sans origin is 4 components. It took a minute to realize it but the
+right triangles that are bisected by the axes suffice.
+
+In terms of capstone work, I need to get on it.
+I am heavily debating getting a copy of Tao's Analysis II book or borrowing
+it from the UW Madison system library (can we get it delivered to UW-Whitewater?)
+with the only upside to buying it being adding another fun book to my collection.
+Otherwise, Anna's Archive does exist.
+I have gotten a fleshed-out proof of the relevant fixed-point theorem
+and so feel confident in actually doing it.
+
+Difficulties this week are getting cleared up as we go.
+I think the tricky part thus far is mostly (yet again) the formalization process
+of saying that a manifold ``looks like'' $\RR[n]$ locally.
+It makes sense that every point has to have a open set around it that is
+homeomorphic to an open set in the relevant Euclidean space, so I can justify the
+intuition that way.
+The less explicit (implicit, even?) definitions still seem a bit vague but I guess we'll
+see the equivalence of the parametric and implicit manifold definitions Thursday.
+
+The other big hangup I have at this point in the semester is still derivative related,
+which is a little sad but it's still unintuitive.
+Iain and I discussed this a little but iterated derivatives feel very intimidating since
+they grow in dimension (they become tensors, right?)
+Is there anything useful to be gleaned from them once we use them to show Fubini?
+
+Towards the end of our meeting today you said ``It's about What You Know''.
+Any indiscriminantly opinionated hot takes you'd like to share while on the job?
+Not politically, of course, but about Two Door Cinema Club?
+%Currently really into experimental electronic music but TDCC is fantastic.
+%``eyes in the water'', ``!!`! find the answer !`!!`'', ``EPSILON LOVE'' and ``Toy Car''
+%are my favorites by far right now.
+
+Similarly unrelated, does it feel like I overuse parentheses a lot while writing?
+It's something I've been trying to avoid recently and I am not sure how much it is working.
+
+
+\end{document}

@@ -1,0 +1,43 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Linear? Functions}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{proposition}{}{}
+  Let $f \from \RR[n] \to \RR$, where $tf(x) = f(tx)$.
+  \begin{enumerate}[start=1,label={(\alph*)}]
+    \item Show that all directional derivatives at 0 exist.
+    \item Show $Df(0)$ exists iff $f$ is linear.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Let $0 \ne u \in \RR[n]$. By direct calculation, we see
+  \[ f'(0; u) = \lim_{t \to 0} \frac{f(0 + tu) - f(0)}{t}. \]
+  Using the ``linear'' property of $f$, we see
+  \begin{align*}
+    f'(0; u) &= \lim_{t \to 0} \frac{f(0 + tu) - f(0)}{t}\\
+             &= \lim_{t \to 0} \frac{tf(u)}{t}\\
+             &= \lim_{t \to 0} f(u) = f(u)
+  \end{align*}
+  and so $f'(0; u)$ exist for all $u$.
+
+  \textbf{(b)}
+  Suppose now that $f$ is truly linear, so $f(x) = Ax$ for some $n \times 1$ matrix $A$.
+  Then of course $Df(0)$ exists, since $f$ would then be differentiable everywhere.
+
+  More interestingly, assume $Df(0)$ exists.
+  Then, this necessitates $D_{j}f(0) = f(e_{j})$:
+  \[ Df(0) = [ f(e_{1}) \ f(e_{2}) \ \cdots \ f(e_{n}) ] \]
+\end{proof}
+
+
+\end{document}

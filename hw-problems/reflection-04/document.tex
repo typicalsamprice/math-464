@@ -1,0 +1,58 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{math four sixty-four, reflection four}
+
+\begin{document}
+
+\maketitle
+
+This week has been semi-productive in terms of math. Naturally instead of being \emph{just} busy, I was/am also slightly sick and so am worrying simultaneously about that.
+
+In terms of 281 (general problem solving) I've gotten somewhat comfortable with a couple of the polynomial problems of this week, and have come up with a proof of uniqueness for something
+which is quite exciting since I don't get the chance to do that often. In other non-464 classes nothing particularly special has happened.
+
+In 464 I've gotten much more comfortable with integration in $\RR[n]$,
+since as you said it is much nicer than differentiation.
+I got back into the swing of things dealing with partitions and their subrectangles,
+and all of the arguments using refinements or general partitions $P_{1},P_{2}$ to argue
+for integral inequalities made sense without looking at them too hard at all.
+I also appreciate the fact we are ``using'' measures at all, since even without anything rigorous
+(Tao's measure theory book scares me) it seems intuitive and obvious that something ``infinitely thin''
+contributes no volume to a total integral. Proving generally easy ideas and then turning and saying
+that $\int\limits_{S}\! f = \int\limits_{\Int S}\!\!\! f$ \emph{of course} is really satisfying to me.
+
+The difficulties this week come in the form of not understanding why we are extending Fubini to
+simple regions. I get that these are regions that are ``nice'' because we can basically do Calc III
+integration to them, but is that really it? I get that they are \emph{simple} for a reason however it
+feels lackluster for this to be their only real use.
+Further, looking at this would it be useful to just leverage the definition to show that $\RR[n - 1] \times \set{0}$
+is rectifiable in $\RR[n]$ since you could use $\phi = \psi = 0$ as constant functions?
+
+As a question, is a compact set necessarily rectifiable in $\RR[n]$?
+Given the Koch snowflake example I imagine not but off the top of my head I can't imagine why.
+
+My work thus far on my inverse function theorem proof is still fairly slight,
+although I have the Banach fixed-point theorem down and understood,
+the proof(s) by successive approximation also look interesting.
+Munkres' approach (page 65, for my own future reference)
+with many parts might be more fun simply because I have 45 minutes on final day that I plan to \emph{use}.
+
+Reading ahead into Munkres, I can't wait for (dreading) the change of variables we will do.
+Improper integrals seems strange enough, but even in Calc III I had issues with keeping track of all this stuff
+just between polar and cylindrical. Because this will be substantially more general (I imagine)
+it might be simpler just from that perspective.
+
+A reason given by AI that the Koch snowflake isn't rectifiable is that its perimeter grows by a factor of $4/3$
+at each iteration, and so has infinite perimeter.
+That doesn't feel satisfactory though, and I bet there's a way to show it isn't rectifiable
+without directly showing that every countable cover of $K$ is ``big''.
+
+\end{document}

@@ -1,0 +1,86 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Chapter 6, Section 30, Ex. 5}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}{}{}
+  Let $A = \RR[2] \setminus \set{0}$ and
+  \[ \omega = \frac{-y\, dx + x \, dy}{x^{2} + y^{2}}. \]
+  Show $\omega$ is closed ($d\omega = 0$) but not exactly ($\nexists f, \omega = df$) on $A$.
+\end{theorem}
+
+\begin{proof}
+
+\begin{enumerate}[start=1,label={(\alph*)}]
+  \item Show $\omega$ is closed.
+
+        We can purely calculate that
+        \begin{align*}
+          d\omega &= d\pars*{\frac{-y}{x^{2} + y^{2}} dx + \frac{x}{x^{2} + y^{2}} dy}\\
+          &= \frac{y^{2} - x^{2}}{x^{2} + y^{2}} dx \wedge dy
+            + \frac{y^{2} - x^{2}}{x^{2} + y^{2}} dy \wedge dx.
+        \end{align*}
+        By flipping signs so we can add these forms, it is clear the sum is 0 and
+        so $\omega$ is closed.
+
+  \item Let $B = A \setminus ((0, \infty) \times \set{0})$.
+        Show that for $(x, y) \in B$ there is a unique $t \in (0, 2\pi)$ so that
+        \[ x = \sqrt{x^{2} + y^{2}} \cos t \]
+        and \[ y = \sqrt{x^{2} + y^{2}} \sin t \]
+
+        During the midterm this was shown to be true, and that a piecewise $\arctan$ function
+        is appropriate. This function is called $\phi(x, y)$ and gives the correct $t$.
+        This gives the correct value as it translates between polar and Cartesian coordinates
+        on $B$.
+
+  \item Show $\phi$ is smooth.
+
+        Since this is the arctangent function with holes filled in when $x = 0$ and
+        some offsets, we only need to check that (i) the filled-in points are in fact the limits
+        and (ii) the offsets don't break smoothness.
+
+        For (i) it is clear to see when $x = 0$ that crossing the positive $y$-axis
+        should be going towards exactly $\pi/2$ from either side. The same is true for the
+        negative $y$-axis giving $3\pi/2$ as the limit on both sides.
+
+        To affirm (ii), we see that $\phi(x, 0)$ should be $\pi$ as expected for $x < 0$
+        from above and below.
+        Since we don't include the positive $x$-axis in $B$, we will not look at it here.
+
+  \item Show $\omega = d\phi$ in $B$.
+
+        Since $\phi = \arctan$ up to a constant, we can see that
+        \[ d\phi = \frac{\partial}{\partial x}\arctan(y/x)\, dx + \frac{\partial}{\partial y}\arctan(y/x) \, dy \]
+        and so
+        \[ d\phi = \frac{-y \, dx}{x^{2} + y^{2}} + \frac{x \, dy}{x^{2} + y^{2}} \]
+        which is exactly $\omega$.
+
+  \item Show if $g \in \Omega^{0}(B)$ is closed, then $g$ is constant.
+
+        Let $a = (-1, 0)$. By the mean value theorem, we see for all $x \in B$ distinct from $a$
+        there is some $y \in B$ so that
+        \[ Dg(y) = \frac{Dg(x) - Dg(a)}{\norm{x - a}}. \]
+        Since $g$ is closed, $D_{1}g = D_{2}g = 0$ and so $g$ must be constant.
+
+  \item Show $\omega$ is not exact in $A$.
+
+        Suppose $\omega = df$ for some $f \in \Omega^{0}(A)$.
+        Then, $f|_{B} = g \in \Omega^{0}(B)$ and $g = \phi$ on $B$.
+        If $g$ agrees with $\phi$ on $B$ however, it cannot be re-extended back to $A$ without
+        being discontinuous along the positive $x$-axis. This is because there would necessarily
+        be a jump discontinuity along this part of the axis and so $\omega \ne df$.
+\end{enumerate}
+
+\end{proof}
+
+
+\end{document}

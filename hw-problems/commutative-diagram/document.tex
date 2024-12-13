@@ -1,0 +1,117 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Large Commutative Diagram}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Show that
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJTIl0sWzAsMiwiViJdLFsyLDAsIlxcT21lZ2FeMChBKSJdLFsyLDIsIlxcT21lZ2FeMShBKSJdLFswLDQsIlYiXSxbMCw2LCJTIl0sWzIsNiwiXFxPbWVnYV4zKEEpIl0sWzIsNCwiXFxPbWVnYV4yKEEpIl0sWzAsMV0sWzAsMl0sWzIsM10sWzEsM10sWzEsNF0sWzQsNV0sWzUsNl0sWzQsN10sWzcsNl0sWzMsN11d
+\[\begin{tikzcd}
+  S && {\Omega^0(A)} \\
+  \\
+  V && {\Omega^1(A)} \\
+  \\
+  V && {\Omega^2(A)} \\
+  \\
+  S && {\Omega^3(A)}
+  \arrow["\imath", from=1-1, to=1-3]
+  \arrow["\operatorname{grad}"', from=1-1, to=3-1]
+  \arrow["d", from=1-3, to=3-3]
+  \arrow["\imath", from=3-1, to=3-3]
+  \arrow["\operatorname{curl}"', from=3-1, to=5-1]
+  \arrow["d", from=3-3, to=5-3]
+  \arrow["\alpha", from=5-1, to=5-3]
+  \arrow["\operatorname{div}"', from=5-1, to=7-1]
+  \arrow["d", from=5-3, to=7-3]
+  \arrow["\beta", from=7-1, to=7-3]
+\end{tikzcd}\]
+commutes, where $A \subset \RR[3]$ is open, $S$ are scalar fields on $A$ and $V$ are the vector fields on $A$.
+
+We first show the top square commutes for $A \subset \RR[n]$, then the bottom square works for $\Omega^{n - 1}(A) \to \Omega^{n}(A)$ for general $n$, and
+then that the center works for the exact numbers shown.
+
+\underline{Step 1 (Top Square)}:
+Note that for this, $A \subset \RR[n]$ generally.
+We may have the inclusion $S \to \Omega^{0}(A)$ by sending $f \mapsto f$, since it is a valid 0-form already.
+Similarly, for some vector field $G(x) = (x; \sum_{i}g_{i}e_{i})$ we can send it to
+\[ \sum_{i = 1}^{n}g_{i}dx_{i} \]
+to get a 1-form. So, we aim to show
+\[ d \circ \imath_{S} = \imath_{V} \circ \operatorname{grad}. \]
+\begin{proof}
+  Clearly, almost by definition,
+  \[ d \circ \imath_{S} = \sum_{i}f_{i}dx_{i} \]
+  as this is just $df$ itself.
+  Then, we notice that
+  \begin{align*}
+    (\imath_{V} \circ \operatorname{grad})f(x) &= \imath_{V}(x; \sum_{i}f_{i}(x)e_{i})\\
+    &= \sum_{i}f_{i}dx_{i}.
+  \end{align*}
+  Since these are naturally equal, this square commutes.
+\end{proof}
+
+\underline{Step 2 (Bottom Square)}:
+Again, $A \subset \RR[n]$ and we define for a vector field $F(x) = (x; \sum_{i}f_{i}e_{i})$ the operations:
+\[ \div F = \sum_{i}D_{i}f_{i} \]
+and
+\[ \alpha F  = \sum_{i}\pars{-1}^{i - 1} f_{i} \bigwedge_{k \ne i}dx_{k}. \]
+We also define the map $\beta$ from scalar fields as $f \mapsto f \bigwedge_{i} dx_{i}$.
+So, we must show
+\[ \beta \circ \div = d \circ \alpha. \]
+\begin{proof}
+  On the left hand side, we note
+  \begin{align*}
+    (\beta \circ \div)F &= \beta\pars*{\sum_{i}D_{i}f_{i}}\\
+    &= \pars*{\sum_{i} D_{i}f_{i}} \bigwedge_{k} dx_{k} = \sum_{i} D_{i}f_{i} \bigwedge_{k} dx_{k}.
+  \end{align*}
+  On the right side, we find
+  \begin{align*}
+    (d \circ \alpha)F &= d\pars*{\sum_{i}\pars{-1}^{i - 1}f_{i} \bigwedge_{k \ne i} dx_{k}}\\
+    &= \sum_{i}\pars{-1}^{i - 1}df_{i} \bigwedge_{k \ne i}dx_{k}.
+  \end{align*}
+  Note that $df_{i} = \sum_{j = 1}^{n}\frac{\partial f_{i}}{\partial x_{j}} dx_{j}$, and so in the sum above every term cancels except for when $j = i$,
+  since those differential forms are already present in the big wedge.
+  For each term, we must shift the new $dx_{i}$ over $i - 1$ times, and so the leading $-1$-power terms all go to positive 1.
+  So, we find that this is equal to (with the substitution of notation that $\partial f_{i}/\partial x_{j} = D_{j}f_{i}$)
+  \[ \sum_{i}D_{i}f_{i} \bigwedge_{k}dx_{k} \]
+  as desired.
+\end{proof}
+
+\underline{Step 3 (Middle Square)}:
+Now, we only work in $\RR[3]$, and use the operator
+\[ \curl F(x) = (x; (D_{2}f_{3} - D_{3}f_{2})e_{1} + (D_{3}f_{1} - D_{1}f_{3})e_{2} + (D_{1}f_{2} - D_{2}f_{1})e_{3}) \]
+and our $\alpha$ from before. Thus, our final goal is to show
+\[ d \circ \imath_{V} = \alpha \circ \curl. \]
+\begin{proof}
+  To look at the left hand side first, we note that
+  \[ (d \circ \imath_{V})F(x) = d\sum_{i}f_{i}dx_{i} = \sum_{i}df_{i}dx_{i} \]
+  and so we may expand this as
+  \[ df_{1}dx_{1} + df_{2}dx_{2} + df_{3}dx_{3}. \]
+  Each term post-differential will only have 2 terms since the part corresponding to each $dx_{i}$ will go to zero by getting $dx_{i} \wedge dx_{i}$.
+  For the first term, we get
+  \[ df_{1}dx_{1} = D_{2}f_{1} dx_{2} \wedge dx_{1} + D_{3}f_{1} dx_{3} \wedge dx_{1} = - D_{2}f_{1} dx_{1} \wedge dx_{2} - D_{3}f_{1} dx_{1} \wedge dx_{3}. \]
+  Doing similar expansions on the $f_{2}$ and $f_{3}$ terms, we get
+  \begin{align*}
+    df_{2}dx_{2} &= D_{1}f_{2} dx_{1} \wedge dx_{2} - D_{3}f_{2} dx_{2} \wedge dx_{3}\\
+    df_{3}dx_{3} &= D_{1}f_{3} dx_{1} \wedge dx_{3} + D_{2}f_{3} dx_{2} \wedge dx_{3}.
+  \end{align*}
+  Grouping like terms by their differentials, we get
+  \begin{equation}\label{eq:1} (D_{2}f_{3} - D_{3}f_{2}) dx_{2} \wedge dx_{3} + (D_{1}f_{3} - D_{3}f_{1}) dx_{1} \wedge dx_{3} + (D_{1}f_{2} - D_{2}f_{1}) dx_{1} \wedge dx_{2}. \end{equation}
+  Turning to the right-hand side, we find (calling the resulting ``curled'' components $g_{i}$)
+  \begin{align*}
+    (\alpha \circ \curl)F(x) &= \alpha(x; (D_{2}f_{3} - D_{3}f_{2})e_{1} + (D_{3}f_{1} - D_{1}f_{3})e_{2} + (D_{1}f_{2} - D_{2}f_{1})e_{3})\\
+                    &= \sum_{i = 1}^{3} \pars{-1}^{i - 1} g_{i} \bigwedge_{k \ne i}dx_{k}.
+  \end{align*}
+  Knowing our bound is 3, we can manually expand this as
+  \[ (D_{2}f_{3} - D_{3}f_{2}) dx_{2} \wedge dx_{3} - (D_{3}f_{1} - D_{1}f_{3}) dx_{1} \wedge dx_{3} + (D_{1}f_{2} - D_{2}f_{1}) dx_{1} \wedge dx_{2}. \]
+  Noticing that the negation gets distributed on the second term gets us exactly~\eqref{eq:1}, we find the composition is equal and so the whole diagram commutes.
+\end{proof}
+
+\end{document}

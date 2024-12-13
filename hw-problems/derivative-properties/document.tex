@@ -1,0 +1,37 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Derivative Properties}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{proposition}{}{}
+  The derivative $D$ is linear.
+  That is, for $f, g \from \RR[m] \to \RR[n]$ differentiable at $a \in \RR[m]$:
+  \begin{enumerate}[start=1,label={(\alph*)}]
+    \item $D(f + g) = Df + Dg$, and
+    \item $D(\lambda f) = \lambda Df$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  We show this by first ``assuming'' the derivative is correct, and then showing it does satisfy the property the (unique) matrix should.
+  First, we see that for $f + g$:
+  \begin{align*}
+    \frac{(f + g)(a + h) - (f + g)(a) - (Df + Dg) \cdot h}{\abs{h}} &= \frac{f(a + h) - f(a) - (Df)h + g(a + h) - g(a) - (Dg)h}{\abs{h}}\\
+    &= \frac{f(a + h) - f(a) - Df h}{\abs{h}} + \frac{g(a + h) - g(a) - Dg h}{\abs{h}} \to 0 + 0 = 0.
+  \end{align*}
+  Nearly identically for some $\lambda \in \RR$:
+  \[
+    \frac{(\lambda f)(a + h) - (\lambda f)(a) - (\lambda Df)h}{\abs{h}} = \lambda\frac{f(a + h) - f(a) - Df h}{\abs{h}} \to \lambda \cdot 0 = 0.
+  \]
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,48 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Additive Integration, The Hard Way}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{proposition}{}{}
+  For disjoint rectangles $Q_{1}$ and $Q_{2}$, if the integrals exist:
+  \[ \int_{Q_{1} \cup Q_{2}}f = \int_{Q_{1}}f + \int_{Q_{2}}f. \]
+  You must show it using partitions. (I don't know if I can assume existence of both/one implying the other's)
+\end{proposition}
+\begin{proof}
+  We assume that $f \ge 0$ \textendash{} we already take linearity/negation summing at this point.
+  Let $Q_{1}, Q_{2} \subset \RR[n]$ be disjoint rectangles, and let $P$ partition their union.
+  Define
+  \[ f_{1}(x) = \begin{cases}
+    f(x) \qquad \text{ if } x \in Q_{1}\\
+    0 \quad\qquad \text{ otherwise }
+  \end{cases} \]
+and likewise for $f_{2}$.
+We note that $f = f_{1} + f_{2}$ where we \emph{care}, and so we can rewrite our goal as showing
+\[ \int_{Q_{1} \cup Q_{2}} f_{1} + f_{2} = \int_{Q_{1}} (f_{1} + f_{2}) + \int_{Q_{2}} (f_{1} + f_{2}). \]
+As they are defined however, we see $f_{1} = 0$ on $Q_{2}$ and vice versa, leading to
+\[ \int\limits_{Q_{1} \cup Q_{2}} f_{1} + f_{2} = \int_{Q_{1}} f_{1} + \int_{Q_{2}} f_{2}. \]
+Since these integrals exist, we know that for $P$ we have
+\[ L(f_{1}, P) + L(f_{2}, P) \le L(f_{1} + f_{2}, P) \le \int\limits_{Q_{1} \cup Q_{2}} (f_{1} + f_{2}) \le U(f_{1} + f_{2}, P) \le U(f_{1}, P) + U(f_{2}, P). \]
+The inside three terms come from the existence of $\int f$ over the union, and the outer inequalities come from the triangle inequality as for any rectangle $R$ derived from $P$:
+\[ m_{R}(f_{1}) + m_{R}(f_{2}) \le m_{R}(f_{1} + f_{2}) \]
+and
+\[ M_{R}(f_{1}) + M_{R}(f_{2}) \le M_{R}(f_{1} + f_{2}), \]
+which imply the same inequalities for the lower and upper sums respectively.
+However, the integrals over just $Q_{1}$ and $Q_{2}$ also exist, and by virtue of the outermost inequality $L(f_{1}) + L(f_{2}) \le U(f_{1}) + U(f_{2})$ we know that
+the sum of the integrals is squished inside of this inequality chain as well.
+As the lower and upper sums converge for the summed integrals, everything converges and becomes equal which in fact does show
+\[ \int\limits_{Q_{1} \cup Q_{2}} f = \int_{Q_{1}} f + \int_{Q_{2}} f \]
+for disjoint $Q_{i}$.
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,72 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Derivative Shenanigans}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{proposition}{}{}
+  Let $f \from \RR[m] \to \RR[n]$ be differentiable.
+  Then,
+  \begin{enumerate}[start=1,label={(\alph*)}]
+    \item $Df = 0$ uniformly iff $f$ is constant.
+    \item For some $n \times m$ matrix $A$, $Df = A$ uniformly iff $f$ is affine. That is,
+          \[ f(x) = Ax + c \]
+          for some $c \in \RR[n]$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{lemma}{}{}
+  Let $g \from [a, b] \to \RR$ be differentiable on $(a, b)$.
+  If $g'(x) = 0$ for all $x \in D$, then $g$ is constant.
+\end{lemma}
+\begin{proof}[Proof of Lemma]
+  Let $x \in [a, b]$. Of course by the mean value theorem we have some $y \in (a, x)$ so that
+  \[ g'(y) = \frac{g(x) - g(a)}{x - a}. \]
+  Since $g' = 0$, then $g(x) - g(a) = 0$ and thus $g(x) = g(a)$ for all $x \in (a, b)$.
+  Doing the same from the other side shows that $g(a) = g(b)$, and so $g$ is constant.
+\end{proof}
+
+\begin{proof}[Proof of (a)]
+  The backwards direction is true by simple calculation; any constant function has uniformly derivative 0.
+  Therefore, we concern ourselves now with the forward direction.
+
+  Let $f \from \RR[m] \to \RR[n]$ be differentiable, and $Df = 0$ uniformly.
+  This requires that $Df_{i} = 0$ for all $1 \le i \le n$, and so let us show that $g = f_{i}$ is constant on $\RR[m]$.
+  Suppose $g(x) \ne g(y)$ for some $x, y \in \RR[m]$, and define a sequence of points:
+  \begin{align*}
+    v_{0} &= (x_{1}, \ldots, x_{m}) = x\\
+    v_{1} &= (y_{1}, x_{2}, \ldots, x_{m})\\
+    v_{2} &= (y_{1}, y_{2}, x_{3}, \ldots, x_{m})\\
+    v_{m} &= (y_{1}, \ldots, y_{m}) = y.
+  \end{align*}
+  Along the line from $v_{0}$ to $v_{1}$ for instance, we follow the $x_{1}$-axis, and so we can create
+  (WLOG $x_{1} < y_{1}$)
+  \[ h \from [x_{1}, y_{1}] \to \RR \]
+  and we observe
+  \[ h(x_{1}) = g(v_{0}) \qquad \text{ and } \qquad h(y_{1}) = g(v_{1}) \]
+  and further that $h = g$ on $[x_{1}, y_{1}] \times (x_{2}, \ldots, x_{m})$.
+  By direct calculation of course, $h' = \partial g/\partial x_{1} = 0$, and we may use our lemma to note $h(x_{1}) = h(y_{1})$, and so $g(v_{0}) = g(v_{1})$.
+  For each pair of points $v_{k}, v_{k + 1}$ we can define such a transition function, and by iterating we find then that
+  \[ g(v_{0}) = g(v_{1}) = \cdots = g(v_{i}) = \cdots = g(v_{m}). \]
+  However, $v_{0} = x$ and $v_{m} = y$ and we reach a contradiction where $g(x) = g(y)$.
+  With $g$ constant, every component of $f$ must be and thus $f$ as a whole.
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+  The backwards direction is again true by calculation. We know for such an $f$ that
+  \[ f_{i} = \sum_{j = 1}^{m}a_{ij}x_{j} + c_{j} \]
+  and so $a_{ij}$ shows up exactly for $D_{j}f_{i}$, showing $Df = A$.
+
+  Suppose now that $Df = A$ uniformly. Let $h(x) = f(x) - Ax$, and notice that $h' = 0$ everywhere.
+  By the above, $h = c$ for some $c \in \RR[n]$ and so $f(x) - Ax = c$ which means $f(x) = Ax + c$.
+\end{proof}
+
+\end{document}

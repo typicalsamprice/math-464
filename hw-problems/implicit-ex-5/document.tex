@@ -1,0 +1,45 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Exercise D\'os}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Let $f, g \from \RR[3] \to \RR$ be of class $C^{1}$.
+``In general'', $f(x, y, z) = 0$ and likewise for $g$ form smooth surfaces,
+and their intersection is a smooth curve.
+If $\vec{x} \in \RR[3]$ is a solution to both, and $\partial(f, g)/\partial(x, y, z)$ is rank 2, then
+near $\vec{x}$ one can solve the equations for two of $x, y, z$ in terms of the third,
+giving a locally parametrized curve of the solution set.
+
+\begin{proof}
+  Given $f, g$ that satisfy our hypotheses and some common solution $(x, y, z) = \vec{v} \in \RR[3]$.
+  We create the function $h \from \RR[3] \to \RR[2]$ by $\vec{a} \mapsto (f(\vec{a}), g(\vec{a}))$.
+
+  Note that $\D h$ is given by
+  \[ \begin{bmatrix}
+    \partial_1f & \partial_2f & \partial_3f\\
+    \partial_1g & \partial_2g & \partial_3g\\
+  \end{bmatrix} \]
+  has rank 2 by hypothesis.
+  We know that \emph{some} minor of $\D h$ must be nonsingular at $\vec{v}$, and so without loss of generality we assume it is the minor
+  \[ \begin{bmatrix}
+    \partial_{2} f & \partial_{3} f\\
+    \partial_{2} g & \partial_{3} g\\
+  \end{bmatrix} \]
+
+  This means by the implicit function theorem there is a function $\phi \from \RR \to \RR[2]$
+  such that $\phi(x) = (y, z)$ and $h(x, \phi(x)) = 0$ on some open neighborhood $B \subset \RR$ around $x$.
+  This means that we have a parametrized curve in terms of $x$ that is a
+  \emph{common solution set} for both $f$ and $g$ with $x \mapsto f(x, \phi(x)) = g(x, \phi(x)) = 0$.
+\end{proof}
+
+
+\end{document}

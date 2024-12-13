@@ -1,0 +1,58 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{Completeness of $\RR[n]$}
+
+\begin{document}
+
+\maketitle
+
+\begin{lemma}\label{lem:lem-1}
+  If a sequence $(a_{n})$ in $\RR[k]$ is Cauchy, then each component sequence is Cauchy.
+\end{lemma}
+\begin{proof}
+  Let $(a_{n})$ be such a Cauchy sequence in the supremum norm (as $\norm{\indet}$ will represent throughout.)
+  Suppose some component $a_{n,i}$ for some $1 \le i \le k$ is \emph{not} Cauchy and let $N$ be large enough
+  that the Cauchy condition holds for $n > m > N$.
+  Then, we would have
+  \[
+    \norm*{\begin{bmatrix} a_{n,1} \\ \vdots \\ a_{n, k}\end{bmatrix} - \begin{bmatrix} a_{m,1} \\ \vdots \\ a_{m,k} \end{bmatrix}}
+    = \norm*{\begin{bmatrix}a_{n,1} - a_{m,1} \\ \vdots \\ a_{n,k} - a_{m,k}\end{bmatrix}} < \eps.
+  \]
+  However by virtue of what the supremum norm measures, we know that there exist $n, m$ so that
+  \[ \norm{\vec{a}_{n} - \vec{a}_{m}} < \eps \le \abs{a_{n,i} - a_{m,i}} \]
+  which is a contradiction.
+\end{proof}
+
+\begin{theorem}
+  Any Cauchy sequence $(a_{n})$ in $\RR[k]$ converges in $\RR[k]$.
+\end{theorem}
+
+\begin{proof}
+  Let $(a_{n})$ be Cauchy in $\RR[k]$, and we assume $k \ge 2$.
+  By Lemma~\ref{lem:lem-1} we know that each $a_{n,i}$ are Cauchy, and as such each must converge
+  to some well-defined value in $\bbR$. Call each $a_{n,i} \to x_{i}$ and create the vector
+  \[ \vec{x} = (x_{1}, \ldots, x_{k}). \]
+  We claim that $(a_{n}) \to \vec{x}$, and let $\eps > 0$.
+  Since each vector component converges, they each have some integer called $N_{i}$ such that for $n > N_{i}$
+  there is \[ \abs{a_{n,i} - x_{i}} < \eps \] for a given $\eps > 0$.
+  Pick $N = \max_{i} N_{i}$ and notice that each component is still sufficiently close to its corresponding $x_{i}$.
+  Then, we notice for $n > N$
+  \[ \norm{\vec{a}_{n} - \vec{x}}=
+    \norm*{\begin{bmatrix}
+      a_{n,1} - x_{1}\\
+      \vdots \\
+      a_{n,k} - x_{k}
+    \end{bmatrix}} = \max\set*{\abs{a_{n,i} - x_{i}}} < \eps.
+  \]
+  Hence, $(a_{n}) \to \vec{x}$.
+\end{proof}
+
+\end{document}

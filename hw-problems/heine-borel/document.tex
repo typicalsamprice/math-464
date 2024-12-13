@@ -1,0 +1,70 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[11pt]{article}
+
+\author{Sam Price}
+\title{Heine-Borel}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\begin{theorem}{Heine-Borel (General Metric Space)}{}
+  If $(X, d)$ is a compact metric space then $X$ is closed and bounded.
+\end{theorem}
+
+\begin{proof}
+  Let $X$ be compact, and fix $a \in X$. Then, cover with
+  \[ B_{k} = \set{ x \in X \mid d(a, x) < k } \]
+  for all $k \in \NN$.
+  This open cover can then be reduced to a finite cover, with $m$ being the largest-indexed open set.
+  This $B_{m}$ contains $B_{n}$ for $n < m$ and so must contain all of $X$. So, $X$ is bounded.
+
+  Suppose now that $X$ is not closed, and so there is some $y \notin X$ that is a limit point.
+  Take the open cover:
+  \[ C_{r} = \set{ x \in X \mid d(x, y) > r } \]
+  for all $r \in \RR$. Notice that each of these sets are the complements of closed balls, and so are open themselves.
+  Choose finitely many to cover $X$. Then we may pick the smallest index again, say $\delta$.
+  So, if we have a sequence $\set{x_{m}} \in X$ so that $x_{m} \to y$, not all $x_{i}$ are contained in our finite cover.
+  This is because for $\eps < \delta$, we cannot find any $x \in \cup C_{i}$ so that $d(x, y) < \eps$ by definition.
+  So, $X$ must be closed.
+\end{proof}
+
+\begin{lemma}{}{}
+  If $A \subset \RR[n]$ is compact, then $B \subset A$ is compact if $B$ is closed.
+\end{lemma}
+\begin{proof}
+  Let the collection $C$ cover $B$. Then, the cover $C \cup \set{ \RR[n] \setminus B }$ is a cover of $A$.
+  Take finitely many of these since $A$ is compact, and call this cover $C'$. This $C'$ must cover $B$ as well, since it covers $A$.
+  Whether or not $C'$ contains $\RR[n] \setminus B$, the whole of $B$ must be covered by finitely many open sets still.
+\end{proof}
+
+\begin{lemma}{}{}
+  For $a > 0$, $[-a, a]^{n} \subset \RR[n]$ is compact.
+\end{lemma}
+\begin{proof}
+  Let $S_{0} = [-a, a]^{n}$ and let $C$ be an open cover. If $C$ is finite, then we are done, so assume it is infinite.
+  $S_{0}$ may be subdivided into $2^{n}$ subrectangles, at least one of which needs infinitely many elements of $C$ to be covered.
+  Call this subrectangle $S_{1}$. We may continue this process ad infinitum, and while we subdivide let $x_{n} \in S_{n}$ to create a sequence of points in $S_{0}$.
+  We notice that this sequence must be Cauchy, as for any $n \in \NN$ this sequence eventually is wholly contained within $S_{n}$.
+  Further, each has the property that
+  \[ \operatorname{diam}(S_{n}) = \frac{a\sqrt{n}}{2^{n}} \]
+  which can be made arbitrarily small. Therefore, $\set{x_{n}} \to x \in S_{0}$.
+  This $x$ must necessarily be covered by some $U \in C$. This $U$ will also contain some ball $B$ that contains $S_{m}$ for sufficiently large $m$.
+  So, we may replace the infinitely many sets covering $S_{m}$ with just $U$. So, $S_{0}$ may be covered with finitely many sets and so is compact.
+\end{proof}
+
+
+\begin{theorem}{Heine-Borel (Stricter)}{}
+  $A \subset \RR[n]$ is compact iff it is closed and bounded.
+\end{theorem}
+\begin{proof}
+  Let $A$ be closed and bounded. Since it is bounded, it can be enclosed by a rectangle of some size $k$:
+  \[ A \subset [-k, k]^{n}. \]
+  By the previous lemmas, $A$ is compact. The other direction is proven before.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,24 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{$V(xy)$ (not) homeomorphic to $\RR$}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Let $X = V(xy)$, and suppose it is homeomorphism to $\RR$ via $f \from X \to \RR$.
+Consider $X' = X - \set{0}$ and $R = \RR - \set{ f(0) }$.
+Clearly, $f|_{X'} \from X' \to R$ should still be a homeomorphism as we didn't disrupt any properties of its inverse nor continuity/bijectivity.
+However we can clearly see that $R$ has two connected components, and by looking at $X'$ closely it is noted that there are four connected components.
+
+Let $R_{1}, R_{2}$ be the disjoint connected parts of $R$. Since $f$ is a homeomorphism, it requires that $f\inv(R_{1})$ and $f\inv(R_{2})$ are connected as well.
+This is a problem however, as each of the four disconnected pieces of $X'$ must be mapped onto $R_{1} \sqcup R_{2}$ while preserving connectedness.
+In this case, there would be at least two missing points from $f(X')$ and so $X$ cannot be homeomorphic to $\RR$.
+
+\end{document}

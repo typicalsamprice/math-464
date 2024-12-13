@@ -1,0 +1,43 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Determinant Equivalency}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+These are the definitions, first for Spence:
+\begin{enumerate}
+  \item $\det_{S} AB = \det_{S}A \det_{S}B$.
+  \item $\det_{S} (e_{1}, \ldots, e_{n}) = 1$.
+  \item $\det_{S} (x_{1}, \ldots, \lambda u + w, \ldots, x_{n}) = \lambda \det_{S} (x_{1}, \ldots, u, \ldots, x_{n}) + \det_{S} (x_{1}, \ldots, w, \ldots, x_{n})$.
+  \item If $B$ is the result of two columns being swapped in $A$, then $\det_{S} B = -\det_{S} A$.
+\end{enumerate}
+Second for Munkres:
+\begin{enumerate}[label=\Alph*.]
+  \item If $B$ is the result of swapping two \emph{rows} of $A$, then $\det_{M} B = - \det_{M} A$.
+  \item If $A$ is the rows $(r_{1}, \ldots, \lambda r_{i} + \lambda' r_{i}', \ldots, r_{n})$ then
+        $\det_{M} A = \lambda\det_{M} (r_{1}, \ldots, r_{i}, \ldots, r_{n}) + \lambda' \det_{M} (r_{1}, \ldots, r_{i}', \ldots, r_{n})$.
+  \item $\det_{M} I = 1$.
+\end{enumerate}
+
+Let $A \in \mathcal{M}_{n}(\RR)$ for these.
+
+We may show (A) from Spence by seeing the matrix $E_{ij}$ swaps rows $i$ and $j$, defined by
+swapping columns $i$ and $j$ of $I_{n}$. By (1), (2) and (4), we see that
+\[ A_{i \leftrightarrow j} = E_{ij}A \leadsto \det(A_{i \leftrightarrow j}) = \det(E_{ij})\det(A) = -\det(A). \]
+We also see row multiplication by $A_{\lambda,k}$ being row $k$ multiplied by $\lambda$.
+This can be achieved by $M_{\lambda,k}$ having column $k$ having $\lambda$ instead of $k$.
+Using (1), (2) and (3) this time, we get
+\[ A_{\lambda,k} = M_{\lambda,k}A \leadsto \det(A_{\lambda,k}) = \det(M_{\lambda,k})\det(A) = \lambda\det(A). \]
+
+To show rows being added, suppose row $k$ is equal to $u + v$.
+Then each column would have $c_{k} = u_{k} + v_{k}$.
+
+\end{document}

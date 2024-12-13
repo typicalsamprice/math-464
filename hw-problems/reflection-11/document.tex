@@ -1,0 +1,39 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\author{Sam Price}
+\title{Reflection 11}
+\date{November 19, 2024}
+
+\newif\ifprinted%
+%\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+This week was a helpful one in all the math I did.
+First, let's talk about the things I concretely got done.
+I tidied up the cross-line non-homeomorphism quite nicely by realizing bijectivity disallows specifically disjoint unions of open sets being one connected open set.
+Obviously, this had to be true almost by the definition of connectedness, but was good to finalize.
+I also finished up the $\GL,\SL$ manifold proofs.
+You said earlier today that the reasoning behind $D\det$ being nonsingular was less complete/coherent than it should be,
+I'll include what I believe is more concise and understandable proof at the bottom.
+
+This week in 464 has been quite nice. Today felt far better than it has for a while now, but seeing pieces fall into place feels satisfying now.
+Differential forms feel more or less intuitive as we go along, and the algebra is great when almost everything disappears in one fell swoop.
+
+I have my work cut out for me for the next week or two -\ definitely going to get busy while I'm away from campus.
+The two big parts are the capstone theorem that I'll show off (``present'') during finals as well as the exercises in order to get all the math-only stuff done.
+I don't think the capstone will take \emph{all} the time though, since I have many resources to look at as well as \textbf{plenty} of time to work through my proof(s)
+meticulously.
+
+\underline{Determinant argument}: Let $J = D\det$ for a fixed $n \times n$ matrix case.
+Clearly, $\rank J = 0$ iff every entry is zero, but we will concern ourselves with only the first $n$ entries.
+The entry in $J$ for each of the $a_{1,n}$ is precisely $\pars{-1}^{n + 1}m_{1,n}$.
+If all such entries are zero, this is a problem, as we have
+\[ \det A = \sum_{i = 1}^{n}\pars{-1}^{n + 1}a_{1,n}m_{1,n} = \sum_{i = 1}^{n}a_{1,n} \cdot 0 = 0 \]
+which is a contradiction as we assume first $A \in \GL_{n}$ and so has nonzero determinant.
+
+\end{document}

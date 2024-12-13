@@ -1,0 +1,20 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Midterm 3}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+\maketitle
+
+Find a function $f \from \RR[n] \to \RR[m]$ with $n, m \ge 2$ so that $f$ is $C^{2}$ but not $C^{3}$.
+
+Let $A(x) = \frac{1}{2}\int x\abs{x}$. This function is $C^{2}$, as its derivative is the absolute value's integral, and so the second derivative is the absolute value itself.
+It is not $C^{3}$ however, since $A$ is not thrice differentiable. Let $f(x, y) = (A(x), A(y))$. Since each component of $f$ is $C^{2}$, it must be as well.
+Same reasoning for it to not be $C^{3}$ follows.
+
+\end{document}

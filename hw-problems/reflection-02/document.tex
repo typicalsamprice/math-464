@@ -1,0 +1,63 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{Reflection Two: Overanalyzed Goo}
+
+\begin{document}
+
+\maketitle
+
+This week's work has been pretty interesting.
+So far, my best moments in this class have come from \emph{understanding new things} for the most part.
+Once we started working in $\RR[n]$ and thinking about differentiation more, I've gotten a bit better at really understanding why things are the way they are.
+The issue with this is realizing I have to do more exercises from the book; everything is divinely interpreted at present and I think doing more with these objects
+will give me a better intuition for how they operate. In particular, I think the transition to a derivative being a \emph{matrix} was a pretty big shock at first but has come
+to mean more now that I've realized why ``the derivative'' could be thought of as a $1 \times 1$ matrix before.
+
+The biggest mindblock this week while working on problems comes in two parts: the first
+was cleared up today after my use of $\sup$ in $\RR[n]$ was declared okay.
+I didn't know how much I could use on faith (all the way to MCT?) but now with the power
+of the supremum I am confident I can tackle completeness without any major issues.
+As I said earlier, showing MCT and Bolzano-Weierstrass and using the fact Cauchy sequences are
+inherently bounded will give me a completeness proof.
+
+The second issue I am having with an exercise is the determinancy equivalency.
+I'm guessing Spence $\implies$ Munkres isn't as difficult, since we can easily leverage
+the fact that $\det AB = \det A \det B$. I'm wondering if the optimal solution path to this one
+is showing that $\det EA = \det E \det A$ for an elementary matrix.
+This feels like a similar argument I remember reading later in the book,
+so I'm sure something like that can be possible and make life easier.
+Going back the other way would involve something similar, and is manageable if so.
+
+This week I will most likely not have too much time to dedicate to this (or any math)
+and so will have to optimize for the classes that have time constraints.
+After this weekend though, I want to grind out a decent amount of exercises/convincing myself of things
+in the textbook. Particularly focused on the topology aspects in part because they are very fun for me
+(who would have guessed) and also because using the sup norm more often to understand its use
+cases and strengths feels like something I need to build up.
+
+The rest of my time will be spent on differentiation, since that's what we have only just covered to
+(some of?) its full extent so far. Once I really understood my own algebra mistakes and mishaps
+today, it more or less fell into place. This really got you to show your insanity with partials though,
+because I don't think I'll ever be able to look at
+\[ D_{i}D_{j}f(a) \in \Lin(\RR[m], \Lin(\RR[m], \RR[n])) \iso \Lin(\RR[m] \times \RR[m], \RR[n]) \]
+and think whoever invented this is normal. Better than saying $\Hom$ I suppose, but still feels a tad silly.
+On a more serious note however, I think this is the first really complicatedly new thing that isn't (just)
+linear algebra that I went from almost no understanding to at least having the ego to say I actually
+do get the concepts. It was also nice to use actual notation/concepts like the $C^{r}$ classes
+instead of doing the Calc 3 tactic of ``if the function is sufficiently nice.''
+Granted, actually having the concrete assumption makes the proof (rigorously) possible so at a
+certain point I shouldn't expect the lack of precise descriptions.
+
+An interesting thought that came to mind tonight: can a function $f \from \bbQ \to \bbR$ be continuous?
+Intuitively no, since $\bbQ$ isn't complete. Once the intuition faded though I am questioning whether or not
+any part of the definition of continuity actually \emph{requires} that. $\bbQ$ is dense after all, and so
+no disproof immediately comes to mind. Food for my brain to chew on sometime.
+\end{document}

@@ -1,0 +1,44 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Sine Kronecker}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Show that for $n, m \in \ZZ$
+\[ \int_{0}^{\pi}\sin(nx)\sin(mx)\, dx = \frac{\pi}{2} \cdot \delta_{nm}. \]
+
+We use the identity
+\[ \sin(\alpha)\sin(\beta) = \frac{\cos(\alpha - \beta) - \cos(\alpha + \beta)}{2}. \]
+
+For the case $n = m$, we see that
+\begin{align*}
+  \int_{0}^{\pi}\sin(nx)^{2}dx &= \int_{0}^{\pi}\frac{1 - \cos(2nx)}{2}dx\\
+  &= \frac{\pi}{2} - \int_{0}^{\pi}\frac{\cos(2nx)}{2}dx.
+\end{align*}
+We know cosine on even multiples of $\pi$ (by periodicity) vanish when integrated from zero.
+The factor of $2n$ inside the function just ``speeds up'' or contracts this into the range $[0, \pi]$.
+So, we find that the second term is zero and we get teh expected value of $\pi/2$.
+
+Now for $n \ne m$, we see using the identity above (we ``secretly'' use it for the case $\alpha = \beta$ before):
+\[
+  \int_{0}^{\pi} \sin(nx)\sin(mx)\,dx = \frac{1}{2}\int_{0}^{\pi}\cos(nx - mx) - \cos(nx + mx) \, dx.
+\]
+To split up the integral, we see that
+\[ \int_{0}^{\pi} \cos(nx - mx)\,dx \]
+with the $u$-substitution of $u = nx - mx$ is just $\int \frac{\cos u}{n - m}$, and similarly for the sum case.
+Evaluating and then replacing $u$ with its value, we find the result is
+\[ \pars*{\frac{\sin(nx - mx)}{n - m} - \frac{\sin(nx + mx)}{n + m}}\Big|_{0}^{\pi}. \]
+Much like $\cos$ evaluating to zero on these, we can write the insides as $(n - m)x$ and $(n + m)x$ respectively.
+Because integer multiples of $\pi$ are zero under the sine map, the integral itself is zero as expected.
+
+The reason we split cases is because when $n = m$ we would divide by zero, which is a no-no.
+
+\end{document}

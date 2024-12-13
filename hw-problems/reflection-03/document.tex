@@ -1,0 +1,63 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass[12pt]{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{Reflection Three}
+
+\begin{document}
+
+\maketitle
+
+This week was particularly interesting.
+I didn't do \emph{any} work the entire weekend because I either worked for 12 hours a day or had
+5 assignments due on Sunday that took priority because to the strict deadline.
+There's a lot of good and meh this time around, but nothing too bad at all.
+I'm getting more and more comfortable working with matrices as derivatives, and while my life
+was slipping away in real-time I think I actually get how integration will work to some extent.
+The only nitpick I talked myself through is that each $I_{i}$ is in $P_{i} \in P$.
+You may have covered that, but again, I was on the verge of sleep towards the end.
+
+The best part of this week in terms of math was obviously \emph{finally} realizing the trick to proving that $\RR[n]$ is complete.
+The biggest trick was finding a way to actually \emph{use} the fact a sequence is Cauchy beyond my kernel of an
+idea that would leverage boundedness.
+I was spending so much time trying to prove Bolzano-Weierstrass but couldn't get past
+the possibility of the component that determines the sup norm switching. I'll try to get it written up to
+give to you during class on Thursday, although there's a possibility I finish writing it up before I leave my room tomorrow morning and can give it to you earlier.
+This exercise also felt important to do because after I did a little bit of reading on the inverse function theorem
+and the Banach fixed-point theorem, I realized it relied on the fact that $\RR[n]$ is complete to justify a sequence
+being Cauchy and thus convergent.
+
+In terms of work so far on my capstone proof, I don't have much besides a cursory glance at the big parts of it.
+The sequential proof of Banach looks interesting, although I wonder if there is some argument you can make
+that there is both at least one fixed point and at \emph{most} one fixed point.
+The latter is obvious to me, and really the only reason I am considering such a path.
+My thought process is mainly: take two distinct fixed points $x_{1}, x_{2}$.
+Then, $\norm{f(x_{1}) - f(x_{2})} = \norm{x_{1} - x_{2}}$ and contradicts the fact $f$ is a contraction.
+I have plenty of time (at present at least) so I am not going to worry too much yet.
+
+My next exercise(s) that I want to present are twofold:
+play around with the elliptic curve scenario and at least do part (a) of finding $\mathbb{V}(f_{\lm})$.
+It seems at least interesting, and more difficult than what I've done so far.
+The other part is chapter 3 ex. 6, the theorem declaring that $f \from Q \to \bbR$ is integrable if and only if
+for every $\eps > 0$ there is a partition of mesh $\delta > 0$ that has the upper and lower sums within $\eps$ of
+each other.
+
+My greatest weakness right now is linear algebra still, and so my focus will definitely be on that cofactor
+expansion demonstration you talked about today, to show that the determinant of that matrix
+is ``easy'' and intuitive. For now, I think the best course of action is to try and make 355 obsolete.
+
+
+\vspace{1em}
+Fun and unrelated math...news? While in graph theory, we looked at the proof for a graph having an Eulerian circuit.
+Clearly, using some hidden induction, the proof was valid for finite graphs. Thinking about it a bit more, is there some
+really awful and hacky solution for infinite graphs (whose vertices are all of even degree) that can be made?
+My main idea for it would be finding a constructed chain of subgraphs that are Eulerian and then using Zorn's lemma in some
+fancy-shmancy way.
+
+\end{document}

@@ -1,0 +1,72 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+\togglefalse{paper}
+
+\input{theoremboxes}
+
+\author{Sam Price}
+\date{}
+\title{Exercise 1}
+
+\begin{document}
+
+\maketitle
+
+We assume that $V = \bbR^{n}$ for some finite $n$.
+
+\section{Definitions (My Reminders)}
+\begin{definition}[Inner Product]
+  An inner product is a function $\innerprod{\indet, \indet} \from V \times V \to \bbR$ such that:
+  \begin{itemize}
+    \item $\innerprod{x, y} = \innerprod{y, x}$.
+    \item $\innerprod{x, x} \ge 0$.
+    \item $\innerprod{x, x} = 0 \iff x = 0$.
+    \item $\innerprod{\lambda x + \delta y, z} = \lambda \innerprod{x, z} + \delta \innerprod{y, z}$.
+  \end{itemize}
+\end{definition}
+\begin{definition}[Norm]
+  A norm is a function $\norm{\indet} \from V \to \bbR$ such that:
+  \begin{itemize}
+    \item $\norm{x} = 0 \iff x = 0$.
+    \item $\norm{x + y} \le \norm{x} + \norm{y}$.
+    \item $\norm{\lambda x} = \abs{\lambda}\norm{x}$.
+  \end{itemize}
+\end{definition}
+\begin{definition}[Metric]
+  A metric is a function $d \from V \times V \to \bbR$ such that:
+  \begin{itemize}
+    \item $d(x, y) = d(y, x) \ge 0$.
+    \item $d(x, y) = 0 \iff x = y$.
+    \item $d(x, z) \le d(x, y) + d(y, z)$.
+  \end{itemize}
+\end{definition}
+
+\section{Proofs}
+
+\begin{theorem}
+  A metric $d$ induces the norm $\norm{\indet} = d(\indet, 0)$ if and only if:
+  \begin{itemize}
+    \item $d(x, y) = d(x + z, y + z)$ for all $x, y, z \in V$.
+    \item $d(ax, ay) = \abs{a}d(x, y)$ for $x,y \in V$ and nonzero $a \in \bbR$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Let us prove the forward direction first.
+  Clearly, we see that $\norm{x} = 0 \iff x = 0$ and that $\norm{\indet}$ is homogeneous.
+  In fact, the triangle inequality holds by the fact that for $x, y \in V$:
+  \begin{align*}
+    \norm{x + y} = d(x + y, 0) \le d(x, 0) + d(x, x + y) = d(x, 0) + d(0, y) = \norm{x} + \norm{y}.
+  \end{align*}
+  The other direction follows from contraposition: that is,
+\end{proof}
+
+The only issue is that I did find a Math SE post (2888192) that gives the norm on $\bbR^{2}$ above but with:
+\[ d(x, y) = \begin{cases}
+  x - y & \textrm{ if } \lambda x = y, \lambda \ne 0.\\
+  \norm{x}_{\textrm{euc}} + \norm{y}_{\textrm{euc}} & \text{otherwise}.
+\end{cases} \]
+In this case, $d$ is \emph{not} translation invariant.
+
+\end{document}

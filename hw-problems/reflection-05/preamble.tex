@@ -1,0 +1,125 @@
+% Most taken from: https://github.com/SeniorMars/dotfiles/blob/main/latex_template/preamble.tex
+\usepackage{geometry}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{palatino}
+
+% Use the command \doublespacing if needed
+\usepackage{setspace}
+
+\geometry{a4paper, margin=1in}
+
+\usepackage{mathtools}
+\usepackage{amssymb,amsfonts,amsthm,amsmath}
+
+\usepackage{xfrac}
+\usepackage[makeroom]{cancel}
+
+% Use \begin{enumerate}[start=x,label={Q\arabic*)}] for example
+\usepackage{enumitem}
+
+\usepackage{xcolor}
+
+\usepackage{nameref}
+
+% Important options
+% in envs, use options like [baseline=x] to center on row x (or special opts t/[c]/b without 'baseline')
+\usepackage{nicematrix}
+\NiceMatrixOptions{cell-space-limits = 1pt}
+
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{tikzsymbols}
+
+\usepackage{pdfpages}
+
+\usepackage[most,many,breakable]{tcolorbox}
+
+\setlength{\parindent}{1cm}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% THEOREM BOXES %%%
+%%%%%%%%%%%%%%%%%%%%%
+\definecolor{thmbgcol}{HTML}{aec1f9}
+\definecolor{thmhlcol}{HTML}{142c72}
+\definecolor{corbgcol}{HTML}{b599f7}
+\definecolor{corhlcol}{HTML}{2d1760}
+\definecolor{propbgcol}{HTML}{c9f7aa}
+\definecolor{prophlcol}{HTML}{1e631a}
+\definecolor{exbgcol}{HTML}{f7c479}
+\definecolor{exhlcol}{HTML}{604419}
+
+\definecolor{qheadcol}{HTML}{182959}
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within = section]{theorem}{Theorem}{
+  enhanced, breakable, colback = thmbgcol!25,
+  frame hidden, boxrule = 0sp, borderline west = {2pt}{0pt}{thmhlcol},
+  sharp corners, detach title, before upper = \tcbtitle\par\smallskip,
+  coltitle = thmhlcol, fonttitle = \bfseries,
+  description font = \mdseries, separator sign none, segmentation style = {solid, thmhlcol}
+}{th}
+
+\newtcbtheorem[number within = section]{corollary}{Corollary}{
+  enhanced, breakable, colback = corbgcol!25,
+  frame hidden, boxrule = 0sp, borderline west = {2pt}{0pt}{corhlcol},
+  sharp corners, detach title, before upper = \tcbtitle\par\smallskip,
+  coltitle = corhlcol, fonttitle = \bfseries,
+  description font = \mdseries, separator sign none, segmentation style = {solid, corhlcol}
+}{cor}
+
+\newtcbtheorem[number within = section]{proposition}{Proposition}{
+  enhanced, breakable, colback = propbgcol!25,
+  frame hidden, boxrule = 0sp, borderline west = {2pt}{0pt}{prophlcol},
+  sharp corners, detach title, before upper = \tcbtitle\par\smallskip,
+  coltitle = prophlcol, fonttitle = \bfseries,
+  description font = \mdseries, separator sign none, segmentation style = {solid, prophlcol}
+}{prop}
+
+\newtcbtheorem[number within = section]{example}{Example}{
+  enhanced, breakable, colback = exbgcol!25,
+  frame hidden, boxrule = 0sp, borderline west = {2pt}{0pt}{exhlcol},
+  sharp corners, detach title, before upper = \tcbtitle\par\smallskip,
+  coltitle = exhlcol, fonttitle = \bfseries,
+  description font = \mdseries, separator sign none, segmentation style = {solid, exhlcol}
+}{prop}
+
+\newtcbtheorem[number within = section]{definition}{Definition}{
+  enhanced, breakable, colback = red!10,
+  frame hidden, boxrule = 0sp, borderline west = {2pt}{0pt}{red!50!black},
+  sharp corners, detach title, before upper = \tcbtitle\par\smallskip,
+  coltitle = red!50!black, fonttitle = \bfseries,
+  description font = \mdseries, separator sign none, segmentation style = {solid, exhlcol}
+}{def}
+
+\makeatletter
+\newtcbtheorem{question}{Question}{enhanced,
+    breakable,
+    colback=white,
+    colframe=qheadcol,
+    attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+    fonttitle=\bfseries,
+    title={#2},
+    boxed title size=title,
+    boxed title style={%
+            sharp corners,
+            rounded corners=northwest,
+            colback=qheadcol,
+            boxrule=0pt,
+        },
+    underlay boxed title={%
+            \path[fill=tcbcolframe] (title.south west)--(title.south east)
+            to[out=0, in=180] ([xshift=5mm]title.east)--
+            (title.center-|frame.east)
+            [rounded corners=\kvtcb@arc] |-
+            (frame.north) -| cycle;
+        },
+    #1
+}{def}
+\makeatother

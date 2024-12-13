@@ -1,0 +1,53 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\author{Sam Price}
+\title{Chapter 6, Section 30, Ex. 2}
+
+\newif\ifprinted%
+\printedtrue%
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+Let $\omega = xy \,dx + 3 \,dy - yz \,dz$ and $\eta = x \,dx - yz^{2}\,dy + 2x \,dz$.
+Verify
+\begin{itemize}
+  \item $d(d\omega) = 0$, and
+  \item $d(\omega \wedge \eta) = d\omega \wedge \eta - \omega \wedge d\eta$.
+\end{itemize}
+
+For the first, let us calculate $d\omega$ first:
+\begin{align*}
+  d\omega &= (y\, dx + 0) \wedge dx\\
+  &+ (x\, dx + 0 - z\, dz) \wedge dy\\
+  &+ (0 - y\, dz) \wedge dz\\
+  &= x\, dx \wedge dy + z\, dy \wedge dz.
+\end{align*}
+This is zero after another round of $d$ since the partials of $x$ and $z$
+both vanish due to duplicated forms.
+
+Now, we calculate different parts of the equation for the second step:
+\[ d\eta = -2\,dx \wedge dz - 2yz\,dy\wedge dz. \]
+\[ d\omega \wedge \eta = (2x^{2} + xz)\, dx\wedge dy\wedge dz. \]
+\[ \omega \wedge d\eta = (6 - 2xy^{2}z)\,dx\wedge dy\wedge dz. \]
+Subtracting, we find that
+\begin{equation}\label{subtr}
+  d\omega \wedge n - \omega \wedge d\eta = (2x^{2} + xz - 6 + 2xy^{2}z) \, dx\wedge dy\wedge dz.
+\end{equation}
+
+Looking to the left hand side, we see that
+\[
+  \omega \wedge \eta = (-xy^{2}z^{2} - 3x) \, dx \wedge dy
+  + (2x^{2}y + xyz) \, dx \wedge dz
+  + (6x - y^{2}z^{3}) \, dy\wedge dz.
+\]
+Taking the exterior derivative, we get
+\[ d(\omega \wedge \eta) = (6 - 2x^{2} - xz - 2xy^{2}z) \, dx\wedge dy\wedge dz. \]
+
+However, this is the \emph{negative} of~\eqref{subtr}.
+Is this an issue with $(-1)^{3}$ being negative? I am lost.
+
+\end{document}
